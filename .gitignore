@@ -4,3 +4,5 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
+node_modules
+.DS_Store
