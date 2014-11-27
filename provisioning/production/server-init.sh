@@ -8,4 +8,4 @@ apt-get install lxc-docker
 curl -sSL https://get.docker.com/ubuntu/ | sudo sh
 service docker start
 
-# docker run -p 80:8080 -d -e "NODE_ENV=production" gulli/tictactoe
+# docker run -p 80:8080 -d -e "NODE_ENV=production" arnif/tictactoe
