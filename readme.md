@@ -1,5 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/arnif/tictactoe.png?label=ready&title=Ready)](https://waffle.io/arnif/tictactoe)
 [![Build Status](https://travis-ci.org/arnif/tictactoe.svg?branch=master)](https://travis-ci.org/arnif/tictactoe)
+[ ![Codeship Status for arnif/tictactoe](https://codeship.com/projects/9a252bd0-5953-0132-9b23-123ab8314f17/status)](https://codeship.com/projects/50244)
 Project Template for TicTacToe
 =========
 
