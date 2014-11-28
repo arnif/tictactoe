@@ -21,5 +21,17 @@ bower install
 echo "Running grunt"
 grunt
 
+cp ./Dockerfile ./dist/
+
+cd dist
+
+echo "Npm install production"
+npm install --production
+
+echo "Building docker image"
+docker build -t arnif/tictactoe .
+
+echo "Pushing docker image"
+docker push arnif/tictactoe
 
 echo "Done"
