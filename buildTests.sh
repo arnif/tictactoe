@@ -6,6 +6,9 @@ rm -rf ./dist
 echo "Installing grunt"
 npm install grunt
 
+echo "Installing bower"
+npm install bower
+
 echo "Npm install"
 npm install
 
