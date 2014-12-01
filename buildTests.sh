@@ -20,7 +20,6 @@ bower install
 
 echo "Running grunt"
 grunt
-
 rc=$?
 echo $rc
 if [[ $rc != 0 ]] ; then
