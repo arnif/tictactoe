@@ -4,8 +4,6 @@ set -e
 echo Cleaning...
 rm -rf ./dist
 
-ln -s /usr/bin/nodejs /usr/bin/node
-
 echo "Installing grunt"
 npm install grunt
 
