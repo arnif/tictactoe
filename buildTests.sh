@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 echo Cleaning...
 rm -rf ./dist
 
@@ -20,12 +21,8 @@ bower install
 
 echo "Running grunt"
 grunt
-rc=$?
-echo $rc
-if [[ $rc != 0 ]] ; then
-    echo "GRUNT FAILED"
-    exit $rc
-fi
+
+echo "Done running grunt"
 
 cp ./Dockerfile ./dist/
 
