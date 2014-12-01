@@ -3,6 +3,14 @@
 
 module.exports = function(config) {
   config.set({
+
+    reporters: ['progress', 'junit'],
+
+    // the default configuration
+    junitReporter: {
+      outputFile: 'test-results.xml',
+      suite: ''
+    },
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
