@@ -21,6 +21,13 @@ bower install
 echo "Running grunt"
 grunt
 
+rc=$?
+echo $rc
+if [[ $rc != 0 ]] ; then
+    echo "GRUNT FAILED"
+    exit $rc
+fi
+
 cp ./Dockerfile ./dist/
 
 cd dist
@@ -30,8 +37,5 @@ npm install --production
 
 echo "Building docker image"
 docker build -t arnif/tictactoe .
-
-echo "Pushing docker image"
-docker push arnif/tictactoe
 
 echo "Done"
