@@ -31,7 +31,7 @@ describe('create game command', function() {
     should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
   });
 
-  it('should not create game because missing username', function(){
+  it('should emit MissingUsername event because missing username', function(){
 
     var given = [];
     var when =  {
@@ -57,7 +57,7 @@ describe('create game command', function() {
     should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
   });
 
-  it('should not create game because missing game name', function(){
+  it('should emit MissingGameName event because missing game name', function(){
 
     var given = [];
     var when =  {
