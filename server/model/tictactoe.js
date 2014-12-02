@@ -33,8 +33,15 @@ module.exports = function(history){
           }]
         },
         "JoinGame": function (cmd) {
+          if (!cmd.user.userName) {
+            return [{
+              event: "MissingUsername",
+              user: cmd.user,
+              name: cmd.name,
+              timeStamp: cmd.timeStamp
+            }];
+          }
           if(gameState.gameFull()){
-            console.log("Game full");
             return [{
               event: "FullGameJoinAttempted",
               user: cmd.user,
@@ -42,7 +49,6 @@ module.exports = function(history){
               timeStamp: cmd.timeStamp
             }];
           }
-          gameFull = true;
           return [{
             event: "GameJoined",
             user: cmd.user,
