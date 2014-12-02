@@ -20,7 +20,7 @@ module.exports = function(history){
       if (!isOccupiedWith(move.coordinates[0], i, move.type)) {
         break;
       }
-      if (i == 2) {
+      if (i === 2) {
         return true;
       }
     }
@@ -30,7 +30,7 @@ module.exports = function(history){
       if (!isOccupiedWith(i, move.coordinates[i], move.type)) {
         break;
       }
-      if (i == 2) {
+      if (i === 2) {
         return true;
       }
     }
@@ -41,7 +41,7 @@ module.exports = function(history){
         if (!isOccupiedWith(i, i, move.type)) {
           break;
         }
-        if (i == 2) {
+        if (i === 2) {
           return true;
         }
       }
@@ -51,12 +51,11 @@ module.exports = function(history){
   }
 
   function isOccupiedWith(x, y, type) {
-    return board[x][y] == type;
+    return board[x][y] === type;
   }
 
   function makeMove(move) {
     board[move.coordinates[0]][move.coordinates[1]] = move.type;
-    console.log(board);
     return checkWin(move);
   }
   return {
