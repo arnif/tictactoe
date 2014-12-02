@@ -135,3 +135,14 @@ Navigate to http://yourServerIpAddress  and you should have yeoman landing page.
   
 * Can provision a new environment in cloud (Digital Ocean) with minimal input.
   Script server provisioning.
+
+
+### Events
+* CreateGame
+ ** is username provided ?
+* JoinGame
+ ** is the game full ?
+* PlaceMove
+ ** is it the player turn ?
+* EndGame
+* LeaveGame
