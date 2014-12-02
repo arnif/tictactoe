@@ -140,8 +140,10 @@ Navigate to http://yourServerIpAddress  and you should have yeoman landing page.
 ### Events
 * CreateGame
  ** is username provided ?
+ ** is gamename provided ?
 * JoinGame
  ** is the game full ?
+ ** is uername provided ?
 * PlaceMove
  ** is it the player turn ?
 * EndGame

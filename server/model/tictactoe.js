@@ -9,6 +9,22 @@ module.exports = function(history){
 
       var cmdHandlers = {
         "CreateGame": function (cmd) {
+          if (!cmd.name) {
+            return [{
+              event: "MissingGameName",
+              user: cmd.user,
+              name: cmd.name,
+              timeStamp: cmd.timeStamp
+            }];
+          }
+          if (!cmd.user.userName) {
+            return [{
+              event: "MissingUsername",
+              user: cmd.user,
+              name: cmd.name,
+              timeStamp: cmd.timeStamp
+            }];
+          }
           return [{
             event: "GameCreated",
             user: cmd.user,
