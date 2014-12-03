@@ -72,9 +72,9 @@ module.exports = function(history){
             //game has started so player can make move
               if (!gameState.isItMyTurn(cmd.move)) {
                 return [{
-                  event: "IlligalMove",
+                  event: "IllegalMove",
                   reason: {
-                    msg: "Not Your turn",
+                    msg: "Not Your Turn",
                     type: cmd.move.type
                   },
                   user: cmd.user,
@@ -86,7 +86,7 @@ module.exports = function(history){
               var typeAt = gameState.getTypeAt(cmd.move);
               if (typeAt) {
                 return [{
-                  event: "IlligalMove",
+                  event: "IllegalMove",
                   reason: {
                     msg: "Occupied",
                     type: typeAt

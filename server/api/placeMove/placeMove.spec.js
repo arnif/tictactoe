@@ -249,7 +249,7 @@ describe('place move command', function() {
     var when =  makeMove([0,0], "O");
 
     var then = [{
-      event: "IlligalMove",
+      event: "IllegalMove",
       reason: {
         msg: "Occupied",
         type: "X"
@@ -282,9 +282,9 @@ describe('place move command', function() {
     var when =  makeMove([0,1], "X");
 
     var then = [{
-      event: "IlligalMove",
+      event: "IllegalMove",
       reason: {
-        msg: "Not Your turn",
+        msg: "Not Your Turn",
         type: "X"
       },
       user: {

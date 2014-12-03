@@ -18,7 +18,6 @@ module.exports = function(history){
   });
 
   function checkWin(move) {
-    console.log(board);
     //check col
     for(var i = 0; i < 3; i++) {
       if (!isOccupiedWith(move.coordinates[0], i, move.type)) {
