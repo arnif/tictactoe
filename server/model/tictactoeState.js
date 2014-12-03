@@ -4,6 +4,7 @@ module.exports = function(history){
   var gameFull = false;
 
   var board = [[],[],[]];
+  var lastType;
 
   _.each(history, function(event){
     if(event.event === "GameJoined"){
@@ -11,10 +12,12 @@ module.exports = function(history){
     }
     if (event.event === "PlayerMoved") {
       makeMove(event.move);
+      lastType = event.move.type;
     }
   });
 
   function checkWin(move) {
+    console.log(board);
     //check col
     for(var i = 0; i < 3; i++) {
       if (!isOccupiedWith(move.coordinates[0], i, move.type)) {
@@ -47,7 +50,21 @@ module.exports = function(history){
       }
     }
 
+    //anti diag
+    for(i = 0;i < 3; i++){
+      if (!isOccupiedWith(i, (3-1)-i, move.type)) {
+        break;
+      }
+      if (i === 2) {
+        return true;
+      }
+    }
+
     return false;
+  }
+
+  function isItMyTurn(move) {
+    return lastType !== move.type;
   }
 
   function isOccupiedWith(x, y, type) {
@@ -55,8 +72,10 @@ module.exports = function(history){
   }
 
   function makeMove(move) {
-    board[move.coordinates[0]][move.coordinates[1]] = move.type;
-    return checkWin(move);
+    if (isItMyTurn(move)) {
+      board[move.coordinates[0]][move.coordinates[1]] = move.type;
+      return checkWin(move);
+    }
   }
   return {
     gameFull : function(){
@@ -64,6 +83,12 @@ module.exports = function(history){
     },
     makeMove : function(move) {
       return makeMove(move);
+    },
+    getTypeAt : function(move) {
+      return board[move.coordinates[0]][move.coordinates[1]];
+    },
+    isItMyTurn : function(move) {
+      return isItMyTurn(move)
     }
   }
 };

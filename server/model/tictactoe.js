@@ -70,7 +70,33 @@ module.exports = function(history){
           }
           if (gameState.gameFull()) {
             //game has started so player can make move
-
+              if (!gameState.isItMyTurn(cmd.move)) {
+                return [{
+                  event: "IlligalMove",
+                  reason: {
+                    msg: "Not Your turn",
+                    type: cmd.move.type
+                  },
+                  user: cmd.user,
+                  move: cmd.move,
+                  name: cmd.name,
+                  timeStamp: cmd.timeStamp
+                }]
+              }
+              var typeAt = gameState.getTypeAt(cmd.move);
+              if (typeAt) {
+                return [{
+                  event: "IlligalMove",
+                  reason: {
+                    msg: "Occupied",
+                    type: typeAt
+                  },
+                  user: cmd.user,
+                  move: cmd.move,
+                  name: cmd.name,
+                  timeStamp: cmd.timeStamp
+                }]
+              }
               var won = gameState.makeMove(cmd.move);
               if (won) {
                 return [{
@@ -93,8 +119,8 @@ module.exports = function(history){
             return [{
               event: "NotEnoughPlayers",
               user: cmd.user,
-              name: cmd.name,
               move: cmd.move,
+              name: cmd.name,
               timeStamp: cmd.timeStamp
             }];
           }
