@@ -97,8 +97,17 @@ module.exports = function(history){
                   timeStamp: cmd.timeStamp
                 }]
               }
-              var won = gameState.makeMove(cmd.move);
-              if (won) {
+              var moveResult = gameState.makeMove(cmd.move);
+              if (moveResult) {
+                if (moveResult === "DRAW") {
+                  return [{
+                    event: "GameDraw",
+                    user: cmd.user,
+                    move: cmd.move,
+                    name: cmd.name,
+                    timeStamp: cmd.timeStamp
+                  }]
+                }
                 return [{
                   event: "GameWon",
                   user: cmd.user,

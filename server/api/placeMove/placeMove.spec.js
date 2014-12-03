@@ -202,6 +202,42 @@ describe('place move command', function() {
     should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
   });
 
+  it('should emit GameDraw event', function(){
+
+    var given = [
+      createGame,
+      joinGame,
+      playerMoved([0,0], "X"), //1
+      playerMoved([0,1], "O"), //2
+      playerMoved([0,2], "X"), //3
+      playerMoved([1,2], "O"), //4
+      playerMoved([1,0], "X"), //5
+      playerMoved([2,0], "O"), //6
+      playerMoved([1,1], "X"), //7
+      playerMoved([2,2], "O") //8
+    ];
+
+    var when =  makeMove([2,1], "X"); //9
+
+    var then = [{
+      event: "GameDraw",
+      user: {
+        userName: "Bruce"
+      },
+      move: {
+        coordinates: [2,1],
+        type: "X"
+      },
+      name: "TheFirstGame",
+      timeStamp: "2014-12-02T11:29:29"
+    }];
+
+    var actualEvents = tictactoe(given).executeCommand(when);
+    should(actualEvents.length).be.exactly(1);
+
+    should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+  });
+
   it('should emit IlligalMove event with msg occupied', function(){
 
     var given = [

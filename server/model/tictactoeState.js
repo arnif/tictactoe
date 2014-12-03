@@ -3,6 +3,7 @@ var _ = require('lodash');
 module.exports = function(history){
   var gameFull = false;
 
+  var moveCount = 0;
   var board = [[],[],[]];
   var lastType;
 
@@ -24,7 +25,7 @@ module.exports = function(history){
         break;
       }
       if (i === 2) {
-        return true;
+        return "WIN";
       }
     }
 
@@ -34,7 +35,7 @@ module.exports = function(history){
         break;
       }
       if (i === 2) {
-        return true;
+        return "WIN";
       }
     }
 
@@ -45,7 +46,7 @@ module.exports = function(history){
           break;
         }
         if (i === 2) {
-          return true;
+          return "WIN";
         }
       }
     }
@@ -56,8 +57,13 @@ module.exports = function(history){
         break;
       }
       if (i === 2) {
-        return true;
+        return "WIN";
       }
+    }
+
+    //draw
+    if (moveCount === 9) {
+      return "DRAW";
     }
 
     return false;
@@ -74,6 +80,7 @@ module.exports = function(history){
   function makeMove(move) {
     if (isItMyTurn(move)) {
       board[move.coordinates[0]][move.coordinates[1]] = move.type;
+      moveCount++;
       return checkWin(move);
     }
   }
