@@ -5,6 +5,6 @@ var controller = require('./createGame.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
+router.post('/', controller.createGame);
 
 module.exports = router;

@@ -13,21 +13,23 @@ module.exports = function(history){
         "CreateGame": function (cmd) {
           if (!cmd.name) {
             return [{
+              id: cmd.id,
               event: "MissingGameName",
               user: cmd.user,
               name: cmd.name,
               timeStamp: cmd.timeStamp
             }];
           }
-          if (!cmd.user.userName) {
+          if (!cmd.user || !cmd.user.userName ) {
             return [{
-              event: "MissingUsername",
-              user: cmd.user,
+              id: cmd.id,
+              event: "MissingUserInfo",
               name: cmd.name,
               timeStamp: cmd.timeStamp
             }];
           }
           return [{
+            id: cmd.id,
             event: "GameCreated",
             user: cmd.user,
             name: cmd.name,
@@ -35,10 +37,9 @@ module.exports = function(history){
           }]
         },
         "JoinGame": function (cmd) {
-          if (!cmd.user.userName) {
+          if (!cmd.user || !cmd.user.userName) {
             return [{
-              event: "MissingUsername",
-              user: cmd.user,
+              event: "MissingUserInfo",
               name: cmd.name,
               timeStamp: cmd.timeStamp
             }];
