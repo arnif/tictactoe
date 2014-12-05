@@ -1,4 +1,4 @@
-var memoryStore = require('./memorystore');
+var memoryStore = require('./memoryStore');
 var should = require('should');
 
 describe('In memory event store', function() {
