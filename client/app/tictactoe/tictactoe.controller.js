@@ -5,10 +5,12 @@ angular.module('tictactoeApp')
     $scope.message = 'Welcome';
     $scope.awesomeThings = ['yee'];
     $scope.error = false;
+    $scope.processedEvents = [];
+
+    $scope.uuid = Math.floor((Math.random() * 1000) + 1);
 
     $scope.processEvents = function(events) {
-      console.log('process',events);
-      $scope.processedEvents = events;
+      $scope.processedEvents.push(events);
       angular.forEach(events, function(event) {
         if (event.event ===  'GameJoined' || event.event === 'GameCreated') {
           //move user to play area
@@ -22,10 +24,9 @@ angular.module('tictactoeApp')
     $scope.createGame = function() {
       if ($scope.userName && $scope.gameName) {
         $scope.error = false;
-        var uuid = generateUUID();
 
         var postPromise = $http.post('/api/createGame/',{
-            'id':'123',
+            'id':$scope.uuid,
             'cmd':'CreateGame',
             'user':{'userName':$scope.userName},
             'name': $scope.gameName,
@@ -39,7 +40,7 @@ angular.module('tictactoeApp')
             //join game also
 
             var postPromise = $http.post('/api/joinGame/',{
-                'id':uuid,
+                'id':$scope.uuid,
                 'cmd':'JoinGame',
                 'user':{'userName':$scope.userName},
                 'name': $scope.gameName,
@@ -49,8 +50,6 @@ angular.module('tictactoeApp')
 
               $scope.processEvents(data.data);
             });
-
-
 
             //end if
           }
@@ -62,9 +61,6 @@ angular.module('tictactoeApp')
       }
     };
 
-
-    function generateUUID() {
-      return Math.floor((Math.random() * 1000) + 1);
       /*
       var d = new Date().getTime();
       var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -74,6 +70,6 @@ angular.module('tictactoeApp')
       });
       return uuid;
       */
-    }
+
 
   });

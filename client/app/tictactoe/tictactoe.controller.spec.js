@@ -27,6 +27,9 @@ describe('Controller: TicTacToeCtrl', function () {
   });
 
   it('should post variables from scope for name and userName and process resulting events', function () {
+
+    scope.uuid = '123';
+
     httpBackend.expectPOST('/api/createGame/', {
       id : '123',
       cmd: 'CreateGame',
@@ -47,6 +50,47 @@ describe('Controller: TicTacToeCtrl', function () {
     httpBackend.flush();
 
     expect(scope.processedEvents.length).toBe(1);
+
+  });
+
+  it('should create game and join the same game', function () {
+
+    scope.uuid = '123';
+
+    httpBackend.expectPOST('/api/createGame/', {
+      id : '123',
+      cmd: 'CreateGame',
+      user: {
+        userName: 'Bruce'
+      },
+      name: 'TheSecondGame',
+      timeStamp: '2014-12-02T11:29:29'
+    }).respond(
+      [{}]
+    );
+
+    httpBackend.expectPOST('/api/joinGame/', {
+      id : '123',
+      cmd: 'JoinGame',
+      user: {
+        userName: 'Bruce'
+      },
+      name: 'TheSecondGame',
+      timeStamp: '2014-12-02T11:29:29'
+    }).respond(
+      [{}]
+    );
+
+    scope.gameName ='TheSecondGame';
+
+    scope.userName = 'Bruce';
+
+    scope.playAlone = true;
+
+    scope.createGame();
+    httpBackend.flush();
+
+    expect(scope.processedEvents.length).toBe(2);
 
   });
 });
