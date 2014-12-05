@@ -327,6 +327,11 @@ module.exports = function (grunt) {
         src: ['{app,components}/**/*.html'],
         dest: '.tmp/templates.js'
       },
+      tictactoe: {
+        cwd: '<%= yeoman.client %>',
+        src: ['{app,components}/**/*.html'],
+        dest: '.tmp/templates.js'
+      },
       tmp: {
         cwd: '.tmp',
         src: ['{app,components}/**/*.html'],

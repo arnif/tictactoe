@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.use('/api/placeMove', require('./api/placeMove'));
   app.use('/api/joinGame', require('./api/joinGame'));
   app.use('/api/createGame', require('./api/createGame'));
+  app.use('/api/events', require('./api/event'));
   app.use('/api/things', require('./api/thing'));
 
   // All undefined asset or api routes should return a 404

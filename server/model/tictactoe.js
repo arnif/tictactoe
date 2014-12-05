@@ -39,6 +39,7 @@ module.exports = function(history){
         "JoinGame": function (cmd) {
           if (!cmd.user || !cmd.user.userName) {
             return [{
+              id: cmd.id,
               event: "MissingUserInfo",
               name: cmd.name,
               timeStamp: cmd.timeStamp
@@ -46,6 +47,7 @@ module.exports = function(history){
           }
           if(gameState.gameFull()){
             return [{
+              id: cmd.id,
               event: "FullGameJoinAttempted",
               user: cmd.user,
               name: cmd.name,
@@ -53,6 +55,7 @@ module.exports = function(history){
             }];
           }
           return [{
+            id: cmd.id,
             event: "GameJoined",
             user: cmd.user,
             name: cmd.name,

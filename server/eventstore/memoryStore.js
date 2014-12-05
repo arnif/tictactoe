@@ -4,9 +4,11 @@ module.exports = function(){
     loadEvents : function(id){
       return store[id] || [];
     },
-
     storeEvents: function(id, events){
       store[id] = (store[id] || []).concat(events);
+    },
+    clearEvents : function() {
+      store = {};
     }
   }
 };

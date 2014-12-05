@@ -18,6 +18,7 @@ describe('join game command', function() {
     }];
 
     var when = {
+      id: "123",
       cmd: "JoinGame",
       user: {
         userName: "Clark"
@@ -27,6 +28,7 @@ describe('join game command', function() {
     };
 
     var then = [{
+      id: "123",
       event: "GameJoined",
       user: {
         userName: "Clark"
@@ -51,6 +53,7 @@ describe('join game command', function() {
       timeStamp: "2014-12-02T11:29:29"
     },
       {
+        id: "123",
         event: "GameJoined",
         user: {
           userName: "Clark"
@@ -60,6 +63,7 @@ describe('join game command', function() {
       }];
 
     var when = {
+      id: "123",
       cmd: "JoinGame",
       user: {
         userName: "Clark"
@@ -69,6 +73,7 @@ describe('join game command', function() {
     };
 
     var then = [{
+      id: "123",
       event: "FullGameJoinAttempted",
       user: {
         userName: "Clark"
@@ -95,6 +100,7 @@ describe('join game command', function() {
     }];
 
     var when = {
+      id: "123",
       cmd: "JoinGame",
       user: {
         userName: ""
@@ -104,6 +110,7 @@ describe('join game command', function() {
     };
 
     var then = [{
+      id: "123",
       event: "MissingUserInfo",
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"

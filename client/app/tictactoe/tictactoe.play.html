@@ -1,0 +1,29 @@
+<header class="hero-unit" id="banner">
+  <div class="container">
+
+    <h1 ng-if="!gameStart">Waiting for player!
+    <button class="btn btn-primary" ng-click="joinGame()">Join Game</button>
+    </h1>
+    <h1 ng-if="gameStart">Enjoy TicTacToe!</h1>
+  </div>
+</header>
+
+<h1 ng-if="gameStart">Game started GO!</h1>
+
+<table>
+  <tr>
+    <td id="0"></td>
+    <td id="1"></td>
+    <td id="2"></td>
+  </tr>
+  <tr>
+    <td id="3"></td>
+    <td id="4"></td>
+    <td id="5"></td>
+  </tr>
+  <tr>
+    <td id="6"></td>
+    <td id="7"></td>
+    <td id="8"></td>
+  </tr>
+</table>
