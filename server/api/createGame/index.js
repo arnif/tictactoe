@@ -1,10 +1,10 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./createGame.controller');
+var controller = require('./../command.controller');
 
 var router = express.Router();
 
-router.post('/', controller.createGame);
+router.post('/', controller.executeCommand);
 
 module.exports = router;
