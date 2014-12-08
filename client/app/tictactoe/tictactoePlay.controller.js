@@ -73,6 +73,7 @@ angular.module('tictactoeApp')
     $scope.joinGame = function(userName) {
 
       if (userName) {
+        $scope.error = false;
         $scope.userName = userName;
         var postPromise = $http.post('/api/joinGame/',{
             'id':$scope.uuid,
@@ -89,6 +90,8 @@ angular.module('tictactoeApp')
           TicTacToeService.setUserName($scope.userName);
           $scope.myType = TicTacToeService.getMyType();
         });
+      } else {
+        $scope.error = true;
       }
     };
 

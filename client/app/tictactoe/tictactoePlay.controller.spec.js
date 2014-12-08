@@ -13,7 +13,7 @@ describe('Controller: TicTacToeCtrl', function () {
   beforeEach(inject(function ($injector, $controller, $rootScope, $http) {
     http = $http;
     httpBackend = $injector.get('$httpBackend');
-    httpBackend.whenGET('app/tictactoe/tictactoe.play.html').respond(200);
+    //httpBackend.whenGET('app/tictactoe/tictactoe.play.html').respond(200);
     httpBackend.whenGET('/api/events/undefined').respond(200);
 
     scope = $rootScope.$new();
@@ -36,29 +36,6 @@ describe('Controller: TicTacToeCtrl', function () {
 
     httpBackend.flush();
     expect(scope.events.length).toBe(0);
-    /*
-    scope.uuid = '123';
-
-    httpBackend.expectPOST('/api/createGame/', {
-      id : '123',
-      cmd: 'CreateGame',
-      user: {
-        userName: 'Bruce'
-      },
-      name: 'TheSecondGame',
-      timeStamp: '2014-12-02T11:29:29'
-    }).respond(
-      [{}]
-    );
-
-    scope.gameName ='TheSecondGame';
-
-    scope.userName = 'Bruce';
-
-    scope.createGame();
-    httpBackend.flush();
-
-    expect(scope.processedEvents.length).toBe(1); */
 
   });
 
@@ -81,6 +58,17 @@ describe('Controller: TicTacToeCtrl', function () {
     httpBackend.flush();
 
     expect(scope.events.length).toBe(1);
+
+  });
+
+  it('should try to join a game but fail', function() {
+    scope.uuid = '123';
+
+    scope.joinGame();
+    httpBackend.flush();
+
+    expect(scope.events.length).toBe(0);
+    expect(scope.error).toBe(true);
 
   });
 
