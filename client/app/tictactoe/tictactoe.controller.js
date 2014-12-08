@@ -1,21 +1,24 @@
 'use strict';
 
 angular.module('tictactoeApp')
-  .controller('TicTacToeCtrl', function ($scope, $http, $state) {
+  .controller('TicTacToeCtrl', function ($scope, $http, $state, TicTacToeService) {
     $scope.message = 'Welcome';
     $scope.awesomeThings = ['yee'];
     $scope.error = false;
     $scope.processedEvents = [];
 
-    $scope.uuid = Math.floor((Math.random() * 1000) + 1);
+    /* jshint ignore:start */
+    $scope.uuid = generateUUID();
+      //Math.floor((Math.random() * 1000) + 1);
+    /* jshint ignore:end */
 
     $scope.processEvents = function(events) {
       $scope.processedEvents.push(events);
       angular.forEach(events, function(event) {
         if (event.event ===  'GameJoined' || event.event === 'GameCreated') {
           //move user to play area
+          TicTacToeService.setMyType('X');
           $state.go('play', {'uuid': event.id});
-
         }
       });
     };
@@ -29,21 +32,27 @@ angular.module('tictactoeApp')
             'cmd':'CreateGame',
             'user':{'userName':$scope.userName},
             'name': $scope.gameName,
-            'timeStamp':'2014-12-02T11:29:29'}
+            'timeStamp':'2014-12-02T11:29:29'
+          }
         );
         postPromise.then(function(data){
+
+          TicTacToeService.setUserName($scope.userName);
+          TicTacToeService.setGameName($scope.gameName);
 
           $scope.processEvents(data.data);
 
           if ($scope.playAlone) {
             //join game also
+            TicTacToeService.setAlone(true);
 
             var postPromise = $http.post('/api/joinGame/',{
                 'id':$scope.uuid,
                 'cmd':'JoinGame',
                 'user':{'userName':$scope.userName},
                 'name': $scope.gameName,
-                'timeStamp':'2014-12-02T11:29:29'}
+                'timeStamp':'2014-12-02T11:29:29'
+              }
             );
             postPromise.then(function(data){
 
@@ -60,15 +69,17 @@ angular.module('tictactoeApp')
       }
     };
 
-      /*
+      /* jshint ignore:start */
+    function generateUUID() {
       var d = new Date().getTime();
-      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c==='x' ? r : (r&0x3|0x8)).toString(16);
+      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
       });
       return uuid;
-      */
+    }
+     /* jshint ignore:end */
 
 
   });

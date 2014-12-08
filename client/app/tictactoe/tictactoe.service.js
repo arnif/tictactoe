@@ -3,15 +3,50 @@
 angular.module('tictactoeApp')
   .factory('TicTacToeService', function () {
 
-    var events = [];
+    var myType;
+    var alone = false;
+    var userName = 'Nafnlaus';
+    var gameName;
+    var creatorName;
+    var joinName;
 
     // Public API here
     return {
-      getEvents: function() {
-        return events;
+      setMyType: function(type) {
+        myType = type;
       },
-      addEvent: function(e) {
-        events.push(e);
+      getMyType: function(){
+        return myType;
+      },
+      setAlone: function(value) {
+        alone = value;
+      },
+      getAlone: function() {
+        return alone;
+      },
+      setUserName: function(name) {
+        userName = name;
+      },
+      getUserName: function() {
+        return userName;
+      },
+      setGameName: function(name) {
+        gameName = name;
+      },
+      getGameName: function(){
+        return gameName;
+      },
+      setCreatorName: function(name) {
+        creatorName = name;
+      },
+      getCreatorName: function() {
+        return creatorName;
+      },
+      setJoinName: function(name) {
+        joinName = name;
+      },
+      getJoinName: function(){
+        return joinName;
       }
     };
   });

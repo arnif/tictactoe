@@ -8,27 +8,66 @@
 </header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-2">
+  <div class="row" ng-if="gameOver">Game OVER!<br> Winner: {{winner}}</div>
+  <div class="row" ng-if="gameStart">
+    <div class="col-md-6">
       <table>
 
-  <tr>
-    <td id="0" ng-click="move(0,0)"></td>
-    <td id="1" ng-click="move(0,1)"></td>
-    <td id="2" ng-click="move(0,2)"></td>
-  </tr>
-  <tr>
-    <td id="3" ng-click="move(1,0)"></td>
-    <td id="4" ng-click="move(1,1)"></td>
-    <td id="5" ng-click="move(1,2)"></td>
-  </tr>
-  <tr>
-    <td id="6" ng-click="move(2,0)"></td>
-    <td id="7" ng-click="move(2,1)"></td>
-    <td id="8" ng-click="move(2,2)"></td>
-  </tr>
+        <tr>
+          <td id="0" ng-click="move(0,0)">{{board[0][0]}}</td>
+          <td id="1" ng-click="move(0,1)">{{board[0][1]}}</td>
+          <td id="2" ng-click="move(0,2)">{{board[0][2]}}</td>
+        </tr>
+        <tr>
+          <td id="3" ng-click="move(1,0)">{{board[1][0]}}</td>
+          <td id="4" ng-click="move(1,1)">{{board[1][1]}}</td>
+          <td id="5" ng-click="move(1,2)">{{board[1][2]}}</td>
+        </tr>
+        <tr>
+          <td id="6" ng-click="move(2,0)">{{board[2][0]}}</td>
+          <td id="7" ng-click="move(2,1)">{{board[2][1]}}</td>
+          <td id="8" ng-click="move(2,2)">{{board[2][2]}}</td>
+        </tr>
 
-</table>
+    </table>
+    </div>
+
+    <div class="col-md-3">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><Strong>X</Strong> <strong ng-if="creatorName === userName"> - This is YOU!</strong></h3>
+        </div>
+        <div class="panel-body">
+          User: {{creatorName}} <br>
+
+        </div>
+      </div>
+      </div>
+    <div class="col-md-3">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><Strong>O</Strong> <strong ng-if="joinName === userName"> - This is YOU!</strong></h3>
+        </div>
+        <div class="panel-body">
+          User: {{joinName}} <br>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Event History</h3>
+      </div>
+      <div class="panel-body">
+        <div class="alert alert-info" role="alert" ng-repeat="event in events">
+          {{event.event}}
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>

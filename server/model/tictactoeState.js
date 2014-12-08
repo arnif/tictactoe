@@ -85,6 +85,7 @@ module.exports = function(history){
   }
   return {
     gameFull : function(){
+      console.log('sdfasoda');
       return gameFull;
     },
     makeMove : function(move) {

@@ -2,6 +2,7 @@ module.exports = function(history){
 
   var tictactoeState = require('./tictactoeState');
 
+  console.log('history', history);
   var gameState = tictactoeState(history);
 
   var MAX_SIZE = 2;
@@ -29,7 +30,7 @@ module.exports = function(history){
             }];
           }
           return [{
-            id: cmd.id,
+            id: String(cmd.id),
             event: "GameCreated",
             user: cmd.user,
             type: 'X',
@@ -40,7 +41,7 @@ module.exports = function(history){
         "JoinGame": function (cmd) {
           if (!cmd.user || !cmd.user.userName) {
             return [{
-              id: cmd.id,
+              id: String(cmd.id),
               event: "MissingUserInfo",
               name: cmd.name,
               timeStamp: cmd.timeStamp
@@ -48,7 +49,7 @@ module.exports = function(history){
           }
           if(gameState.gameFull()){
             return [{
-              id: cmd.id,
+              id: String(cmd.id),
               event: "FullGameJoinAttempted",
               user: cmd.user,
               name: cmd.name,
@@ -56,7 +57,7 @@ module.exports = function(history){
             }];
           }
           return [{
-            id: cmd.id,
+            id: String(cmd.id),
             event: "GameJoined",
             user: cmd.user,
             type: 'O',
@@ -67,6 +68,7 @@ module.exports = function(history){
         "PlayerPlacedMove": function(cmd) {
           if (cmd.move.coordinates[0] > MAX_SIZE || cmd.move.coordinates[1] > MAX_SIZE) {
             return [{
+              id: String(cmd.id),
               event: "InvalidMove",
               user: cmd.user,
               move: cmd.move,
@@ -78,6 +80,7 @@ module.exports = function(history){
             //game has started so player can make move
               if (!gameState.isItMyTurn(cmd.move)) {
                 return [{
+                  id: String(cmd.id),
                   event: "IllegalMove",
                   reason: {
                     msg: "Not Your Turn",
@@ -92,6 +95,7 @@ module.exports = function(history){
               var typeAt = gameState.getTypeAt(cmd.move);
               if (typeAt) {
                 return [{
+                  id: String(cmd.id),
                   event: "IllegalMove",
                   reason: {
                     msg: "Occupied",
@@ -107,6 +111,7 @@ module.exports = function(history){
               if (moveResult) {
                 if (moveResult === "DRAW") {
                   return [{
+                    id: String(cmd.id),
                     event: "GameDraw",
                     user: cmd.user,
                     move: cmd.move,
@@ -115,6 +120,7 @@ module.exports = function(history){
                   }]
                 }
                 return [{
+                  id: String(cmd.id),
                   event: "GameWon",
                   user: cmd.user,
                   move: cmd.move,
@@ -123,6 +129,7 @@ module.exports = function(history){
                 }]
               }
               return [{
+                id: String(cmd.id),
                 event: "PlayerMoved",
                 user: cmd.user,
                 move: cmd.move,
@@ -132,6 +139,7 @@ module.exports = function(history){
 
           } else {
             return [{
+              id: String(cmd.id),
               event: "NotEnoughPlayers",
               user: cmd.user,
               move: cmd.move,

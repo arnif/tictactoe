@@ -14,6 +14,7 @@ var createGame = {
   timeStamp: '2014-12-02T11:29:29'
 };
 var joinGame = {
+  id: '123',
   event: 'GameJoined',
   user: {
     userName: 'Clark'
@@ -24,6 +25,7 @@ var joinGame = {
 };
 var makeMove = function(coord, type ){
   return {
+    id: '123',
     cmd: 'PlayerPlacedMove',
     user: {
       userName: 'Bruce'
@@ -38,6 +40,7 @@ var makeMove = function(coord, type ){
 };
 var playerMoved = function(coord, type) {
   return {
+    id: '123',
     event: 'PlayerMoved',
     user: {
       userName: 'Bruce'
@@ -63,6 +66,7 @@ describe('place move command', function() {
     var when =  makeMove([1,2], 'X');
 
     var then = [{
+      id: '123',
       event: 'PlayerMoved',
       user: {
         userName: 'Bruce'
@@ -91,6 +95,7 @@ describe('place move command', function() {
     var when =  makeMove([3,3], 'X');
 
     var then = [{
+      id: '123',
       event: 'InvalidMove',
       user: {
         userName: 'Bruce'
@@ -123,6 +128,7 @@ describe('place move command', function() {
     var when =  makeMove([0,2], 'X');
 
     var then = [{
+      id: '123',
       event: 'GameWon',
       user: {
         userName: 'Bruce'
@@ -155,6 +161,7 @@ describe('place move command', function() {
     var when =  makeMove([2,2], 'X');
 
     var then = [{
+      id: '123',
       event: 'GameWon',
       user: {
         userName: 'Bruce'
@@ -187,6 +194,7 @@ describe('place move command', function() {
     var when =  makeMove([0,2], 'X');
 
     var then = [{
+      id: '123',
       event: 'GameWon',
       user: {
         userName: 'Bruce'
@@ -223,6 +231,7 @@ describe('place move command', function() {
     var when =  makeMove([2,1], 'X'); //9
 
     var then = [{
+      id: '123',
       event: 'GameDraw',
       user: {
         userName: 'Bruce'
@@ -252,6 +261,7 @@ describe('place move command', function() {
     var when =  makeMove([0,0], 'O');
 
     var then = [{
+      id: '123',
       event: 'IllegalMove',
       reason: {
         msg: 'Occupied',
@@ -285,6 +295,7 @@ describe('place move command', function() {
     var when =  makeMove([0,1], 'X');
 
     var then = [{
+      id: '123',
       event: 'IllegalMove',
       reason: {
         msg: 'Not Your Turn',
@@ -316,6 +327,7 @@ describe('place move command', function() {
     var when =  makeMove([1,2], 'X');
 
     var then = [{
+      id: '123',
       event: 'NotEnoughPlayers',
       user: {
         userName: 'Bruce'
