@@ -114,6 +114,46 @@ describe('Controller: TicTacToeCtrl', function () {
     scope.move(0,1);
     httpBackend.flush();
 
+    expect(scope.board[0][1]).toBe('X');
+    expect(scope.events.length).toBe(1);
+
+  });
+
+  it('should make the winning move', function() {
+    scope.uuid = '123';
+
+    httpBackend.expectPOST('/api/placeMove/', {
+      id : '123',
+      cmd: 'PlayerPlacedMove',
+      user: {
+      },
+      move: {
+        coordinates: [0,1]
+      },
+      timeStamp: '2014-12-02T11:29:29'
+    }).respond(
+      [{
+      }]
+    );
+
+    httpBackend.expectGET('/api/events/123').respond({
+      data: {
+        event: 'GameWon',
+        move: {
+          coordinates: [0,1],
+          type: 'X'
+        },
+        user: {
+          userName: 'Bruce'
+        }
+      }
+    });
+
+    scope.move(0,1);
+    httpBackend.flush();
+
+    expect(scope.gameOver).toBe(true);
+    expect(scope.winner).toBe('Bruce');
     expect(scope.events.length).toBe(1);
 
   });
