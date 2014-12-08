@@ -11,6 +11,14 @@ angular.module('tictactoeApp')
 
     $scope.gameName = '';
 
+    //$scope.board = [['X','O',''], ['O','O','O'], ['O','X','']];
+
+    $scope.board = [
+      ["X", "O", ""],
+      ["O", "", "X"],
+      ["", "", ""]
+    ];
+
     var getPromise = $http.get('/api/events/' + $scope.uuid);
 
     getPromise.then(function(data) {
@@ -44,5 +52,8 @@ angular.module('tictactoeApp')
       });
     };
 
+    $scope.move = function(x, y) {
+      console.log(x + " " + y);
+    };
 
   });

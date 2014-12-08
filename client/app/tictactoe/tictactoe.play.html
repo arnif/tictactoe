@@ -1,6 +1,5 @@
 <header class="hero-unit" id="banner">
   <div class="container">
-
     <h1 ng-if="!gameStart">Waiting for player!
     <button class="btn btn-primary" ng-click="joinGame()">Join Game</button>
     </h1>
@@ -8,22 +7,28 @@
   </div>
 </header>
 
-<h1 ng-if="gameStart">Game started GO!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2">
+      <table>
 
-<table>
   <tr>
-    <td id="0"></td>
-    <td id="1"></td>
-    <td id="2"></td>
+    <td id="0" ng-click="move(0,0)"></td>
+    <td id="1" ng-click="move(0,1)"></td>
+    <td id="2" ng-click="move(0,2)"></td>
   </tr>
   <tr>
-    <td id="3"></td>
-    <td id="4"></td>
-    <td id="5"></td>
+    <td id="3" ng-click="move(1,0)"></td>
+    <td id="4" ng-click="move(1,1)"></td>
+    <td id="5" ng-click="move(1,2)"></td>
   </tr>
   <tr>
-    <td id="6"></td>
-    <td id="7"></td>
-    <td id="8"></td>
+    <td id="6" ng-click="move(2,0)"></td>
+    <td id="7" ng-click="move(2,1)"></td>
+    <td id="8" ng-click="move(2,2)"></td>
   </tr>
+
 </table>
+    </div>
+  </div>
+</div>

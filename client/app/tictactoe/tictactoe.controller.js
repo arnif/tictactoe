@@ -14,7 +14,6 @@ angular.module('tictactoeApp')
       angular.forEach(events, function(event) {
         if (event.event ===  'GameJoined' || event.event === 'GameCreated') {
           //move user to play area
-
           $state.go('play', {'uuid': event.id});
 
         }
