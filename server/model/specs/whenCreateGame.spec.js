@@ -23,6 +23,7 @@ describe('create game command', function() {
       user: {
         userName: "Bruce"
       },
+      type: 'X',
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"
     }];

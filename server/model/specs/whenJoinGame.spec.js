@@ -13,6 +13,7 @@ describe('join game command', function() {
       user: {
         userName: "Bruce"
       },
+      type: 'X',
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"
     }];
@@ -33,6 +34,7 @@ describe('join game command', function() {
       user: {
         userName: "Clark"
       },
+      type: 'O',
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"
     }];
@@ -49,6 +51,7 @@ describe('join game command', function() {
       user: {
         userName: "Bruce"
       },
+      type: 'X',
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"
     },
@@ -58,6 +61,7 @@ describe('join game command', function() {
         user: {
           userName: "Clark"
         },
+        type: 'O',
         name: "TheFirstGame",
         timeStamp: "2014-12-02T11:29:29"
       }];
@@ -95,6 +99,7 @@ describe('join game command', function() {
       user: {
         userName: "Bruce"
       },
+      type: 'X',
       name: "TheFirstGame",
       timeStamp: "2014-12-02T11:29:29"
     }];

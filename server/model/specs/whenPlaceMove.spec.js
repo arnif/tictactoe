@@ -4,48 +4,50 @@ var _ = require('lodash');
 var tictactoe = require('../../model/tictactoe');
 
 var createGame = {
-  id: "123",
-  event: "GameCreated",
+  id: '123',
+  event: 'GameCreated',
   user: {
-    userName: "Bruce"
+    userName: 'Bruce'
   },
-  name: "TheFirstGame",
-  timeStamp: "2014-12-02T11:29:29"
+  type: 'X',
+  name: 'TheFirstGame',
+  timeStamp: '2014-12-02T11:29:29'
 };
 var joinGame = {
-  event: "GameJoined",
+  event: 'GameJoined',
   user: {
-    userName: "Clark"
+    userName: 'Clark'
   },
-  name: "TheFirstGame",
-  timeStamp: "2014-12-02T11:29:29"
+  type: 'O',
+  name: 'TheFirstGame',
+  timeStamp: '2014-12-02T11:29:29'
 };
 var makeMove = function(coord, type ){
   return {
-    cmd: "PlayerPlacedMove",
+    cmd: 'PlayerPlacedMove',
     user: {
-      userName: "Bruce"
+      userName: 'Bruce'
     },
     move: {
       coordinates: coord,
       type: type
     },
-    name: "TheFirstGame",
-    timeStamp: "2014-12-02T11:29:29"
+    name: 'TheFirstGame',
+    timeStamp: '2014-12-02T11:29:29'
   };
 };
 var playerMoved = function(coord, type) {
   return {
-    event: "PlayerMoved",
+    event: 'PlayerMoved',
     user: {
-      userName: "Bruce"
+      userName: 'Bruce'
     },
     move: {
       coordinates: coord,
       type: type
     },
-    name: "TheFirstGame",
-    timeStamp: "2014-12-02T11:29:29"
+    name: 'TheFirstGame',
+    timeStamp: '2014-12-02T11:29:29'
   };
 };
 
@@ -58,19 +60,19 @@ describe('place move command', function() {
       joinGame
     ];
 
-    var when =  makeMove([1,2], "X");
+    var when =  makeMove([1,2], 'X');
 
     var then = [{
-      event: "PlayerMoved",
+      event: 'PlayerMoved',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [1,2],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -86,19 +88,19 @@ describe('place move command', function() {
       joinGame
     ];
 
-    var when =  makeMove([3,3], "X");
+    var when =  makeMove([3,3], 'X');
 
     var then = [{
-      event: "InvalidMove",
+      event: 'InvalidMove',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [3,3],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -112,25 +114,25 @@ describe('place move command', function() {
     var given = [
       createGame,
       joinGame,
-      playerMoved([0,0], "X"),
-      playerMoved([1,0], "O"),
-      playerMoved([0,1], "X"),
-      playerMoved([1,1], "O")
+      playerMoved([0,0], 'X'),
+      playerMoved([1,0], 'O'),
+      playerMoved([0,1], 'X'),
+      playerMoved([1,1], 'O')
     ];
 
-    var when =  makeMove([0,2], "X");
+    var when =  makeMove([0,2], 'X');
 
     var then = [{
-      event: "GameWon",
+      event: 'GameWon',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [0,2],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -144,25 +146,25 @@ describe('place move command', function() {
     var given = [
       createGame,
       joinGame,
-      playerMoved([0,0], "X"),
-      playerMoved([1,0], "O"),
-      playerMoved([1,1], "X"),
-      playerMoved([2,1], "O")
+      playerMoved([0,0], 'X'),
+      playerMoved([1,0], 'O'),
+      playerMoved([1,1], 'X'),
+      playerMoved([2,1], 'O')
     ];
 
-    var when =  makeMove([2,2], "X");
+    var when =  makeMove([2,2], 'X');
 
     var then = [{
-      event: "GameWon",
+      event: 'GameWon',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [2,2],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -176,25 +178,25 @@ describe('place move command', function() {
     var given = [
       createGame,
       joinGame,
-      playerMoved([2,0], "X"),
-      playerMoved([1,0], "O"),
-      playerMoved([1,1], "X"),
-      playerMoved([2,1], "O")
+      playerMoved([2,0], 'X'),
+      playerMoved([1,0], 'O'),
+      playerMoved([1,1], 'X'),
+      playerMoved([2,1], 'O')
     ];
 
-    var when =  makeMove([0,2], "X");
+    var when =  makeMove([0,2], 'X');
 
     var then = [{
-      event: "GameWon",
+      event: 'GameWon',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [0,2],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -208,29 +210,29 @@ describe('place move command', function() {
     var given = [
       createGame,
       joinGame,
-      playerMoved([0,0], "X"), //1
-      playerMoved([0,1], "O"), //2
-      playerMoved([0,2], "X"), //3
-      playerMoved([1,2], "O"), //4
-      playerMoved([1,0], "X"), //5
-      playerMoved([2,0], "O"), //6
-      playerMoved([1,1], "X"), //7
-      playerMoved([2,2], "O") //8
+      playerMoved([0,0], 'X'), //1
+      playerMoved([0,1], 'O'), //2
+      playerMoved([0,2], 'X'), //3
+      playerMoved([1,2], 'O'), //4
+      playerMoved([1,0], 'X'), //5
+      playerMoved([2,0], 'O'), //6
+      playerMoved([1,1], 'X'), //7
+      playerMoved([2,2], 'O') //8
     ];
 
-    var when =  makeMove([2,1], "X"); //9
+    var when =  makeMove([2,1], 'X'); //9
 
     var then = [{
-      event: "GameDraw",
+      event: 'GameDraw',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [2,1],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -244,26 +246,26 @@ describe('place move command', function() {
     var given = [
       createGame,
       joinGame,
-      playerMoved([0,0], "X")
+      playerMoved([0,0], 'X')
     ];
 
-    var when =  makeMove([0,0], "O");
+    var when =  makeMove([0,0], 'O');
 
     var then = [{
-      event: "IllegalMove",
+      event: 'IllegalMove',
       reason: {
-        msg: "Occupied",
-        type: "X"
+        msg: 'Occupied',
+        type: 'X'
       },
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [0,0],
-        type: "O"
+        type: 'O'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -277,26 +279,26 @@ describe('place move command', function() {
     var given = [
       createGame,
       joinGame,
-      playerMoved([0,0], "X")
+      playerMoved([0,0], 'X')
     ];
 
-    var when =  makeMove([0,1], "X");
+    var when =  makeMove([0,1], 'X');
 
     var then = [{
-      event: "IllegalMove",
+      event: 'IllegalMove',
       reason: {
-        msg: "Not Your Turn",
-        type: "X"
+        msg: 'Not Your Turn',
+        type: 'X'
       },
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [0,1],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);
@@ -311,19 +313,19 @@ describe('place move command', function() {
       createGame
     ];
 
-    var when =  makeMove([1,2], "X");
+    var when =  makeMove([1,2], 'X');
 
     var then = [{
-      event: "NotEnoughPlayers",
+      event: 'NotEnoughPlayers',
       user: {
-        userName: "Bruce"
+        userName: 'Bruce'
       },
       move: {
         coordinates: [1,2],
-        type: "X"
+        type: 'X'
       },
-      name: "TheFirstGame",
-      timeStamp: "2014-12-02T11:29:29"
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
     }];
 
     var actualEvents = tictactoe(given).executeCommand(when);

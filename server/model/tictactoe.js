@@ -32,6 +32,7 @@ module.exports = function(history){
             id: cmd.id,
             event: "GameCreated",
             user: cmd.user,
+            type: 'X',
             name: cmd.name,
             timeStamp: cmd.timeStamp
           }]
@@ -58,6 +59,7 @@ module.exports = function(history){
             id: cmd.id,
             event: "GameJoined",
             user: cmd.user,
+            type: 'O',
             name: cmd.name,
             timeStamp: cmd.timeStamp
           }];
