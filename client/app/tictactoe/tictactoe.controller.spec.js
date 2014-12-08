@@ -93,6 +93,16 @@ describe('Controller: TicTacToeCtrl', function () {
     expect(scope.processedEvents.length).toBe(2);
 
   });
+
+  it('should try to create a game with no username', function() {
+    scope.uuid = '123';
+
+    scope.createGame();
+    httpBackend.flush();
+
+    expect(scope.error).toBe(true);
+
+  });
 });
 
 /*jshint ignore:end*/
