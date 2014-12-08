@@ -1,14 +1,41 @@
 <header class="hero-unit" id="banner">
   <div class="container">
     <h1 ng-if="!gameStart">Waiting for player!
-    <button class="btn btn-primary" ng-click="joinGame()">Join Game</button>
     </h1>
     <h1 ng-if="gameStart">Enjoy TicTacToe!</h1>
   </div>
 </header>
 
 <div class="container">
-  <div class="row" ng-if="gameOver">Game OVER!<br> Winner: {{winner}}</div>
+
+  <div class="panel panel-default" ng-if="!gameStart">
+    <div class="panel-body">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="inputUserName" class="col-sm-2 control-label">User name</label>
+          <div class="col-sm-10">
+            <input type="text" ng-model="userName" class="form-control" id="inputUserName" placeholder="User name">
+          </div>
+        </div>
+
+        <div class="alert alert-warning" role="alert" ng-show="error">All fields are required!</div>
+
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" ng-click="joinGame(userName)" class="btn btn-default">Join Game</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="row" ng-if="gameOver">
+
+    <div class="alert alert-success gameover-alert" role="alert">Game OVER! - Winner: <strong>{{winner}}</strong></div></div>
+
+
   <div class="row" ng-if="gameStart">
     <div class="col-md-6">
       <table>

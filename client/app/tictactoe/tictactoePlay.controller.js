@@ -4,14 +4,15 @@ angular.module('tictactoeApp')
   .controller('PlayTicTacToeCtrl', function ($scope, $stateParams, $http, TicTacToeService) {
     $scope.awesomeThings = [];
 
-    console.log($stateParams);
     $scope.gameStart = false;
 
     $scope.uuid = $stateParams.uuid;
 
-    $scope.userName = TicTacToeService.getUserName();
+    $scope.userName = TicTacToeService.getUserName() || '';
 
     $scope.myType = TicTacToeService.getMyType();
+
+    $scope.myTurn = false;
 
     //$scope.board = [['X','O',''], ['O','O','O'], ['O','X','']];
 
@@ -35,10 +36,10 @@ angular.module('tictactoeApp')
 
 
     $scope.processEvents = function(events) {
-      console.log(events);
+      //console.log(events);
       $scope.events = [];
       angular.forEach(events, function(event) {
-        console.log(event);
+        //console.log(event);
         $scope.events.push(event);
         if (event.event === 'GameCreated') {
           $scope.gameName = event.name;
@@ -48,11 +49,12 @@ angular.module('tictactoeApp')
           $scope.gameStart = true;
           $scope.joinName = event.user.userName;
         }
+
         if (event.event === 'PlayerMoved' || event.event === 'GameWon' || event.event === 'GameDraw') {
           var x = event.move.coordinates[0];
           var y = event.move.coordinates[1];
           $scope.board[x][y] = event.move.type;
-          console.log($scope.board);
+          //console.log($scope.board);
 
           if (event.event === 'GameWon' || event.event === 'GameDraw') {
             $scope.gameOver = true;
@@ -61,33 +63,33 @@ angular.module('tictactoeApp')
             } else {
               $scope.winner = 'Draw!';
             }
-
           }
-
         }
       });
       $scope.events.reverse();
     };
 
 
-    $scope.joinGame = function() {
-      $scope.userName = 'Nafnlaus'; //TODO ask user!
-      var postPromise = $http.post('/api/joinGame/',{
-          'id':$scope.uuid,
-          'cmd':'JoinGame',
-          'user':{'userName':$scope.userName},
-          'name': $scope.gameName,
-          'timeStamp':'2014-12-02T11:29:29'
-        }
-      );
-      postPromise.then(function(data){
-        console.log(data);
-        $scope.processEvents(data.data);
-        TicTacToeService.setMyType('O');
-        TicTacToeService.setUserName('Nafnlaus');
-        $scope.userName = TicTacToeService.getUserName();
-        $scope.myType = TicTacToeService.getMyType();
-      });
+    $scope.joinGame = function(userName) {
+
+      if (userName) {
+        $scope.userName = userName;
+        var postPromise = $http.post('/api/joinGame/',{
+            'id':$scope.uuid,
+            'cmd':'JoinGame',
+            'user':{'userName':userName},
+            'name': $scope.gameName,
+            'timeStamp':'2014-12-02T11:29:29'
+          }
+        );
+        postPromise.then(function(data){
+          //console.log(data);
+          $scope.processEvents(data.data);
+          TicTacToeService.setMyType('O');
+          TicTacToeService.setUserName($scope.userName);
+          $scope.myType = TicTacToeService.getMyType();
+        });
+      }
     };
 
     $scope.move = function(x, y) {
@@ -95,8 +97,6 @@ angular.module('tictactoeApp')
 
       var myType = TicTacToeService.getMyType();
       var user = TicTacToeService.getUserName();
-      console.log(myType);
-      console.log(user);
 
       var moveCmd = {
         id: $scope.uuid,
@@ -111,14 +111,11 @@ angular.module('tictactoeApp')
         name: $scope.gameName,
         timeStamp: '2014-12-02T11:29:29'
       };
-      console.log(moveCmd);
 
 
       var postPromise = $http.post('/api/placeMove/', moveCmd);
-      postPromise.then(function(data){
-        console.log(data);
+      postPromise.then(function(){
         $scope.updateEvents();
-        //$scope.processEvents(data.data);
       });
 
 
@@ -126,6 +123,6 @@ angular.module('tictactoeApp')
 
     setInterval(function() {
       $scope.updateEvents();
-    }, 5000);
+    }, 2000);
 
   });

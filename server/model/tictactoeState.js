@@ -69,6 +69,9 @@ module.exports = function(history){
   }
 
   function isItMyTurn(move) {
+    if (moveCount === 0 && move.type === 'O'){
+      return false;
+    }
     return lastType !== move.type;
   }
 
@@ -85,7 +88,6 @@ module.exports = function(history){
   }
   return {
     gameFull : function(){
-      console.log('sdfasoda');
       return gameFull;
     },
     makeMove : function(move) {

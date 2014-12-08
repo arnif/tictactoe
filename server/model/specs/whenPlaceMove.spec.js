@@ -318,6 +318,39 @@ describe('place move command', function() {
     should(actualEvents).eql(then);
   });
 
+  it('should emit IlligalMove event with msg Not Your Turn', function(){
+
+    var given = [
+      createGame,
+      joinGame
+    ];
+
+    var when =  makeMove([0,1], 'O');
+
+    var then = [{
+      id: '123',
+      event: 'IllegalMove',
+      reason: {
+        msg: 'Not Your Turn',
+        type: 'O'
+      },
+      user: {
+        userName: 'Bruce'
+      },
+      move: {
+        coordinates: [0,1],
+        type: 'O'
+      },
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
+    }];
+
+    var actualEvents = tictactoe(given).executeCommand(when);
+    should(actualEvents.length).be.exactly(1);
+
+    should(actualEvents).eql(then);
+  });
+
   it('should emit NotEnoughPlayers event', function(){
 
     var given = [

@@ -5,7 +5,7 @@ angular.module('tictactoeApp')
 
     var myType;
     var alone = false;
-    var userName = 'Nafnlaus';
+    var userName;
     var gameName;
     var creatorName;
     var joinName;
