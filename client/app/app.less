@@ -32,6 +32,23 @@ td {
   text-align: center;
 }
 
+table {
+  width:370px;
+  margin-bottom:25px;
+}
+
+
+.move-zone {
+  position:absolute;
+  left:0;
+  -webkit-animation:movingbox 5s infinite;
+}
+
+@-webkit-keyframes movingbox{
+  from{left:10%;}
+  to{left:90%;}
+}
+
 
 // injector
 @import 'main/main.less';

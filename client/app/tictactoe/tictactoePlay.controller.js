@@ -2,7 +2,6 @@
 
 angular.module('tictactoeApp')
   .controller('PlayTicTacToeCtrl', function ($scope, $stateParams, $http, TicTacToeService) {
-    $scope.awesomeThings = [];
 
     $scope.gameStart = false;
 
@@ -13,6 +12,8 @@ angular.module('tictactoeApp')
     $scope.myType = TicTacToeService.getMyType();
 
     $scope.myTurn = false;
+
+    $scope.creator = TicTacToeService.getCreator();
 
     //$scope.board = [['X','O',''], ['O','O','O'], ['O','X','']];
 

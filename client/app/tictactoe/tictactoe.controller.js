@@ -3,7 +3,6 @@
 angular.module('tictactoeApp')
   .controller('TicTacToeCtrl', function ($scope, $http, $state, TicTacToeService) {
     $scope.message = 'Welcome';
-    $scope.awesomeThings = ['yee'];
     $scope.error = false;
     $scope.processedEvents = [];
 
@@ -39,28 +38,10 @@ angular.module('tictactoeApp')
 
           TicTacToeService.setUserName($scope.userName);
           TicTacToeService.setGameName($scope.gameName);
+          TicTacToeService.setCreator(true);
 
           $scope.processEvents(data.data);
 
-          if ($scope.playAlone) {
-            //join game also
-            TicTacToeService.setAlone(true);
-
-            var postPromise = $http.post('/api/joinGame/',{
-                'id':$scope.uuid,
-                'cmd':'JoinGame',
-                'user':{'userName':$scope.userName},
-                'name': $scope.gameName,
-                'timeStamp':'2014-12-02T11:29:29'
-              }
-            );
-            postPromise.then(function(data){
-
-              $scope.processEvents(data.data);
-            });
-
-            //end if
-          }
 
         });
 

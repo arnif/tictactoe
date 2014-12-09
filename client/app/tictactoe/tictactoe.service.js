@@ -4,11 +4,11 @@ angular.module('tictactoeApp')
   .factory('TicTacToeService', function () {
 
     var myType;
-    var alone = false;
     var userName;
     var gameName;
     var creatorName;
     var joinName;
+    var creator = false;
 
     // Public API here
     return {
@@ -17,12 +17,6 @@ angular.module('tictactoeApp')
       },
       getMyType: function(){
         return myType;
-      },
-      setAlone: function(value) {
-        alone = value;
-      },
-      getAlone: function() {
-        return alone;
       },
       setUserName: function(name) {
         userName = name;
@@ -47,6 +41,12 @@ angular.module('tictactoeApp')
       },
       getJoinName: function(){
         return joinName;
+      },
+      setCreator: function(value) {
+        creator = value;
+      },
+      getCreator: function() {
+        return creator;
       }
     };
   });
