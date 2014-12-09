@@ -67,7 +67,7 @@
 
     <div class="col-md-3">
 
-      <div class="panel panel-default">
+      <div ng-class="{ 'panel panel-default': nextUp !== creatorName , 'panel panel-primary': nextUp === creatorName  }">
         <div class="panel-heading">
           <h3 class="panel-title"><Strong>X</Strong> <strong ng-if="creatorName === userName"> - This is YOU!</strong></h3>
         </div>
@@ -79,7 +79,7 @@
       </div>
     <div class="col-md-3">
 
-      <div class="panel panel-default">
+      <div ng-class="{ 'panel panel-default': nextUp !== joinName , 'panel panel-primary': nextUp === joinName  }">
         <div class="panel-heading">
           <h3 class="panel-title"><Strong>O</Strong> <strong ng-if="joinName === userName"> - This is YOU!</strong></h3>
         </div>

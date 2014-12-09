@@ -43,6 +43,9 @@ angular.module('tictactoeApp')
         if (event.event === 'GameCreated') {
           $scope.gameName = event.name;
           $scope.creatorName = event.user.userName;
+          if (events.length <= 2) {
+            $scope.nextUp = event.user.userName;
+          }
         }
         if (event.event === 'GameJoined') {
           $scope.gameStart = true;
@@ -53,7 +56,8 @@ angular.module('tictactoeApp')
           var x = event.move.coordinates[0];
           var y = event.move.coordinates[1];
           $scope.board[x][y] = event.move.type;
-          //console.log($scope.board);
+
+          $scope.nextUp = $scope.getNext(event.user.userName);
 
           if (event.event === 'GameWon' || event.event === 'GameDraw') {
             $scope.gameOver = true;
@@ -66,6 +70,14 @@ angular.module('tictactoeApp')
         }
       });
       $scope.events.reverse();
+    };
+
+    $scope.getNext = function(userName) {
+      if ($scope.joinName === userName) {
+        return $scope.creatorName;
+      } else {
+        return $scope.joinName;
+      }
     };
 
 
@@ -119,8 +131,6 @@ angular.module('tictactoeApp')
       postPromise.then(function(){
         $scope.updateEvents();
       });
-
-
     };
 
     setInterval(function() {
