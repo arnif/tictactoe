@@ -30,7 +30,7 @@ module.exports = function(history){
 
     //check rows
     for(i = 0; i < 3; i++) {
-      if (!isOccupiedWith(i, move.coordinates[i], move.type)) {
+      if (!isOccupiedWith(i, move.coordinates[1], move.type)) {
         break;
       }
       if (i === 2) {

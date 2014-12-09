@@ -114,7 +114,41 @@ describe('place move command', function() {
     should(actualEvents).eql(then);
   });
 
-  it('should emit GameWon event', function(){
+  it('should emit GameWon event (col)', function(){
+
+    var given = [
+      createGame,
+      joinGame,
+      playerMoved([0,0], 'X'),
+      playerMoved([0,1], 'O'),
+      playerMoved([1,0], 'X'),
+      playerMoved([1,1], 'O')
+    ];
+
+    var when =  makeMove([2,0], 'X');
+
+    var then = [{
+      id: '123',
+      event: 'GameWon',
+      user: {
+        userName: 'Bruce'
+      },
+      move: {
+        coordinates: [2,0],
+        type: 'X'
+      },
+      name: 'TheFirstGame',
+      timeStamp: '2014-12-02T11:29:29'
+    }];
+
+    var actualEvents = tictactoe(given).executeCommand(when);
+    should(actualEvents.length).be.exactly(1);
+
+    should(actualEvents).eql(then);
+  });
+
+
+  it('should emit GameWon event (row)', function(){
 
     var given = [
       createGame,
@@ -140,6 +174,7 @@ describe('place move command', function() {
       name: 'TheFirstGame',
       timeStamp: '2014-12-02T11:29:29'
     }];
+
 
     var actualEvents = tictactoe(given).executeCommand(when);
     should(actualEvents.length).be.exactly(1);
