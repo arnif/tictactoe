@@ -36,10 +36,8 @@ angular.module('tictactoeApp')
 
 
     $scope.processEvents = function(events) {
-      //console.log(events);
       $scope.events = [];
       angular.forEach(events, function(event) {
-        //console.log(event);
         $scope.events.push(event);
         if (event.event === 'GameCreated') {
           $scope.gameName = event.name;
@@ -83,9 +81,9 @@ angular.module('tictactoeApp')
             'timeStamp':'2014-12-02T11:29:29'
           }
         );
-        postPromise.then(function(data){
+        postPromise.then(function(){
           //console.log(data);
-          $scope.processEvents(data.data);
+          $scope.updateEvents();
           TicTacToeService.setMyType('O');
           TicTacToeService.setUserName($scope.userName);
           $scope.myType = TicTacToeService.getMyType();

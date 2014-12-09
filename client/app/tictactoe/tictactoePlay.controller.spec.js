@@ -54,10 +54,58 @@ describe('Controller: TicTacToeCtrl', function () {
       }]
     );
 
+    httpBackend.expectGET('/api/events/123').respond({
+      data: {
+        event: 'GameJoined',
+        user: {
+          userName: 'Bruce'
+        }
+      }
+    });
+
     scope.joinGame('Bruce');
     httpBackend.flush();
 
     expect(scope.events.length).toBe(1);
+    expect(scope.userName).toBe('Bruce');
+    expect(scope.joinName).toBe('Bruce');
+    expect(scope.gameStart).toBe(true);
+
+  });
+
+  it('should join a game that has been created by another user', function() {
+    scope.uuid = '123';
+
+    httpBackend.expectPOST('/api/joinGame/', {
+      id : '123',
+      cmd: 'JoinGame',
+      user: {
+        userName: 'Bruce'
+      },
+      timeStamp: '2014-12-02T11:29:29'
+    }).respond(
+      [{
+      }]
+    );
+
+    httpBackend.expectGET('/api/events/123').respond({
+      data: {
+        event: 'GameCreated',
+        user: {
+          userName: 'Clark'
+        },
+        name: 'FirstGame'
+      }
+    });
+
+    scope.joinGame('Bruce');
+
+    httpBackend.flush();
+
+    expect(scope.events.length).toBe(1);
+    expect(scope.gameName).toBe('FirstGame');
+    expect(scope.creatorName).toBe('Clark');
+    expect(scope.gameStart).toBe(false);
 
   });
 
@@ -142,6 +190,7 @@ describe('Controller: TicTacToeCtrl', function () {
 
     expect(scope.gameOver).toBe(true);
     expect(scope.winner).toBe('Bruce');
+    expect(scope.board[0][1]).toBe('X');
     expect(scope.events.length).toBe(1);
 
   });
@@ -181,6 +230,7 @@ describe('Controller: TicTacToeCtrl', function () {
 
     expect(scope.gameOver).toBe(true);
     expect(scope.winner).toBe('Draw!');
+    expect(scope.board[0][1]).toBe('X');
     expect(scope.events.length).toBe(1);
 
   });
