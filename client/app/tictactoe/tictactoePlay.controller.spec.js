@@ -143,6 +143,9 @@ describe('Controller: TicTacToeCtrl', function () {
         move: {
           coordinates: [0,1],
           type: 'X'
+        },
+        user: {
+          userName: 'Bruce'
         }
       }
     });

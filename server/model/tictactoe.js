@@ -2,7 +2,6 @@ module.exports = function(history){
 
   var tictactoeState = require('./tictactoeState');
 
-  console.log('history', history);
   var gameState = tictactoeState(history);
 
   var MAX_SIZE = 2;
