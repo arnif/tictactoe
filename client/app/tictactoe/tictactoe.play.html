@@ -97,7 +97,7 @@
       </div>
       <div class="panel-body">
         <div class="alert alert-info" role="alert" ng-repeat="event in events">
-          {{event.event}}
+          {{event.event}} by  <strong>{{ event.user.userName }}</strong>
         </div>
       </div>
     </div>

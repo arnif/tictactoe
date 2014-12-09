@@ -15,8 +15,6 @@ angular.module('tictactoeApp')
 
     $scope.creator = TicTacToeService.getCreator();
 
-    //$scope.board = [['X','O',''], ['O','O','O'], ['O','X','']];
-
     $scope.board = [
       ['', '', ''],
       ['', '', ''],
