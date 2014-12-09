@@ -1,13 +1,22 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=381529118681536&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1 ng-if="!gameStart">Waiting for player!
+    <h1 ng-if="!gameStart">Waiting for player!<br>
+      <div class="fb-send" data-href="http://tic.batman.wtf/play/{{uuid}}" data-colorscheme="light"></div>
     </h1>
     <h1 ng-if="gameStart">Enjoy TicTacToe!</h1>
   </div>
 </header>
 
 <div class="container">
-
   <div class="move-zone" ng-if="creator && !gameStart">
 
       <img class="object pacman move-right" src="../assets/images/ajax-loader.gif" alt="Waiting for player"/>
