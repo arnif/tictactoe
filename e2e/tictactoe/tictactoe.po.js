@@ -5,11 +5,14 @@
 
 'use strict';
 
-var MainPage = function() {
+var CreateGamePage = function() {
   this.heroEl = element(by.css('.hero-unit'));
   this.h1El = this.heroEl.element(by.css('h1'));
-  this.imgEl = this.heroEl.element(by.css('img'));
+  this.gameName = element(by.css('#inputGameName'));
+  this.userName = element(by.css('#inputUserName'));
+  this.createGameButton = element(by.css('#createGame'));
+
 };
 
-module.exports = new MainPage();
+module.exports = new CreateGamePage();
 

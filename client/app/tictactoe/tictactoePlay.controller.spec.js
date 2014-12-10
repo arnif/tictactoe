@@ -110,6 +110,24 @@ describe('Controller: TicTacToeCtrl', function () {
 
   });
 
+  it('should process GameCreated event and set next up to that user', function() {
+
+    var events = [{
+      event: 'GameCreated',
+      user: {
+        userName: 'Clark'
+      },
+      name: 'FirstGame'
+    }];
+
+    scope.processEvents(events);
+
+    httpBackend.flush();
+
+    expect(scope.nextUp).toBe('Clark');
+
+  });
+
   it('should try to join a game but fail', function() {
     scope.uuid = '123';
 
@@ -156,6 +174,23 @@ describe('Controller: TicTacToeCtrl', function () {
 
     expect(scope.board[0][1]).toBe('X');
     expect(scope.events.length).toBe(1);
+
+  });
+
+  it('should set next up correctly', function() {
+
+    scope.joinName = 'Clark';
+    scope.creatorName = 'Bruce';
+
+    var result = scope.getNext('Clark');
+
+    httpBackend.flush();
+
+    expect(result).toBe('Bruce');
+
+    var nextResult = scope.getNext('Bruce');
+
+    expect(nextResult).toBe('Clark');
 
   });
 
