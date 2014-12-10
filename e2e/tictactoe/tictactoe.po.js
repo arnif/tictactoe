@@ -10,7 +10,10 @@ var CreateGamePage = function() {
   this.h1El = this.heroEl.element(by.css('h1'));
   this.gameName = element(by.css('#inputGameName'));
   this.userName = element(by.css('#inputUserName'));
+  this.joinName = element(by.css('#inputJoinName'));
+  this.board = element(by.css('#tictactoeBoard'));
   this.createGameButton = element(by.css('#createGame'));
+  this.joinGameButton = element(by.css('#joinGame'));
 
 };
 

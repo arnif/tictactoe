@@ -21,7 +21,71 @@ describe('TicTacToe Create View', function() {
     game.createGame();
     game.waitForTictactoePage();
     game.expectWaitingMessage();
-    //game.expectGameBoardShowing();
-    //game.expectFirstCellShowing();
   });
+
+  it('should create a game and another user will join', function() {
+
+    game.nameOfGame("FirstGame");
+    game.nameOfUser("Bruce");
+    game.createGame();
+    game.waitForTictactoePage();
+
+    browser.getCurrentUrl().then(function(url) {
+
+      browser.getAllWindowHandles().then(function (handles) {
+
+        // handle of first window
+        var originalHandle = handles[0];
+
+        // open new window
+        browser.executeScript('window.open("'+ url +'", "second-window")');
+
+        // switch to new window
+        browser.switchTo().window('second-window');
+
+        // do something within context of new window
+        game.nameOfJoinUser('Clark');
+        game.joinGame();
+        game.waitForTictactoePage();
+
+        browser.driver.wait(function(){
+          return    browser.driver.isElementPresent(by.css('#tictactoeBoard')).then(function(el){
+            return el === true;
+          });
+        }).
+          then(function(){
+            game.expectEnjoyTheGameMessage();
+            game.expectGameBoardShowing();
+          });
+
+
+        // switch to original window
+        browser.switchTo().window(originalHandle);
+
+        // do something within context of original window
+        game.waitForTictactoePage();
+
+        browser.driver.wait(function(){
+          return    browser.driver.isElementPresent(by.css('#tictactoeBoard')).then(function(el){
+            return el === true;
+          });
+        }).
+          then(function(){
+            game.expectEnjoyTheGameMessage();
+            game.expectGameBoardShowing();
+          });
+        //game.expectGameBoardShowing();
+
+        // closes the current window
+        browser.executeScript('window.close()');
+
+      });
+
+
+    });
+
+
+
+  });
+
 });

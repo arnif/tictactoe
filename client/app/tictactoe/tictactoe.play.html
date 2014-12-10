@@ -27,9 +27,9 @@
     <div class="panel-body">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label for="inputUserName" class="col-sm-2 control-label">User name</label>
+          <label for="inputJoinName" class="col-sm-2 control-label">User name</label>
           <div class="col-sm-10">
-            <input type="text" ng-model="userName" class="form-control" id="inputUserName" placeholder="User name">
+            <input type="text" ng-model="userName" class="form-control" id="inputJoinName" placeholder="User name">
           </div>
         </div>
 
@@ -38,7 +38,7 @@
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" ng-click="joinGame(userName)" class="btn btn-default">Join Game</button>
+            <button type="submit" ng-click="joinGame(userName)" id="joinGame" class="btn btn-default">Join Game</button>
           </div>
         </div>
       </form>
@@ -53,7 +53,7 @@
 
   <div class="row" ng-if="gameStart">
     <div class="col-md-6">
-      <table>
+      <table id="tictactoeBoard">
 
         <tr>
           <td id="0" ng-click="move(0,0)">{{board[0][0]}}</td>

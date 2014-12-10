@@ -1,5 +1,4 @@
 module.exports = function(page){
-  var tictactoe;
 
   function nameOfGame(gameName) {
     page.gameName.sendKeys(gameName);
@@ -9,25 +8,35 @@ module.exports = function(page){
     page.userName.sendKeys(userName);
   }
 
+  function nameOfJoinUser(joinName) {
+    page.joinName.sendKeys(joinName);
+  }
+
   function createGame() {
     page.createGameButton.click();
   }
 
+  function joinGame() {
+    page.joinGameButton.click();
+  }
+
   function waitForTictactoePage() {
     browser.waitForAngular();
-    tictactoe = require('./tictactoe.po');
   }
 
   function expectWaitingMessage() {
     expect(page.h1El.getText()).toBe('Waiting for player!');
   }
 
-  /*
-
-  function expectGameBoardShowing() {
-    expect(tictactoe.board).toBeDefined();
+  function expectEnjoyTheGame() {
+    expect(page.h1El.getText()).toBe('Enjoy TicTacToe!');
   }
 
+  function expectGameBoardShowing() {
+    expect(page.board).toBeDefined();
+  }
+
+  /*
   function expectFirstCellShowing() {
     expect(tictactoe.x0y0).toBeDefined();
   }
@@ -36,11 +45,14 @@ module.exports = function(page){
   return {
     nameOfGame: nameOfGame,
     nameOfUser: nameOfUser,
+    nameOfJoinUser: nameOfJoinUser,
     createGame: createGame,
+    joinGame: joinGame,
     waitForTictactoePage: waitForTictactoePage,
-    expectWaitingMessage: expectWaitingMessage
+    expectEnjoyTheGameMessage: expectEnjoyTheGame,
+    expectWaitingMessage: expectWaitingMessage,
+    expectGameBoardShowing: expectGameBoardShowing
     /*
-    expectGameBoardShowing: expectGameBoardShowing,
     expectFirstCellShowing: expectFirstCellShowing */
   }
 };
