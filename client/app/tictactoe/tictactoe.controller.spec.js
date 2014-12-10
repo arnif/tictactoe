@@ -7,13 +7,14 @@ describe('Controller: TicTacToeCtrl', function () {
   // load the controller's module
   beforeEach(module('tictactoeApp'));
 
-  var TicTacToeCtrl, scope, httpBackend, http;
+  var TicTacToeCtrl, scope, httpBackend, http, state, $state;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($injector, $controller, $rootScope, $http) {
+  beforeEach(inject(function ($injector, $controller, $rootScope, $http, $state) {
     http = $http;
     httpBackend = $injector.get('$httpBackend');
     httpBackend.whenGET('app/tictactoe/tictactoe.html').respond(200);
+    state = $state;
 
     scope = $rootScope.$new();
     TicTacToeCtrl = $controller('TicTacToeCtrl', {
@@ -61,6 +62,19 @@ describe('Controller: TicTacToeCtrl', function () {
     httpBackend.flush();
 
     expect(scope.error).toBe(true);
+
+  });
+
+  it('should process event with GameCreated and send user to that game', function() {
+    var event = [{
+      uuid: '123',
+      event: 'GameCreated'
+    }];
+
+    scope.processEvents(event);
+
+    httpBackend.expectGET('app/tictactoe/tictactoe.play.html').respond(200);
+    httpBackend.flush();
 
   });
 });

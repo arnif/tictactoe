@@ -39,7 +39,7 @@ describe('Controller: TicTacToeCtrl', function () {
 
   });
 
-  it('should join a game', function() {
+  it('should join a game and be of type O', function() {
     scope.uuid = '123';
 
     httpBackend.expectPOST('/api/joinGame/', {
@@ -69,6 +69,7 @@ describe('Controller: TicTacToeCtrl', function () {
     expect(scope.events.length).toBe(1);
     expect(scope.userName).toBe('Bruce');
     expect(scope.joinName).toBe('Bruce');
+    expect(scope.myType).toBe('O');
     expect(scope.gameStart).toBe(true);
 
   });

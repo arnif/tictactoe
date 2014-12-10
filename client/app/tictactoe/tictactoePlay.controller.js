@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tictactoeApp')
-  .controller('PlayTicTacToeCtrl', function ($scope, $stateParams, $http, TicTacToeService) {
+  .controller('PlayTicTacToeCtrl', function ($scope, $stateParams, $http, $interval, TicTacToeService) {
 
     $scope.gameStart = false;
 
@@ -131,7 +131,7 @@ angular.module('tictactoeApp')
       });
     };
 
-    setInterval(function() {
+    $interval(function() {
       $scope.updateEvents();
     }, 2000);
 

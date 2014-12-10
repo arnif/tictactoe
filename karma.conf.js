@@ -4,7 +4,7 @@
 module.exports = function(config) {
   config.set({
 
-    reporters: ['progress', 'junit'],
+    reporters: ['progress', 'junit', 'coverage'],
 
     // the default configuration
     junitReporter: {
@@ -45,6 +45,12 @@ module.exports = function(config) {
       '**/*.jade': 'ng-jade2js',
       '**/*.html': 'html2js',
       '**/*.coffee': 'coffee',
+      'client/app/**/!(*spec).js': ['coverage']
+    },
+
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
     },
 
     ngHtml2JsPreprocessor: {
