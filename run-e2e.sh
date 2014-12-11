@@ -17,9 +17,6 @@ npm install
 echo "Bower install"
 bower install
 
-echo "Running grunt"
-grunt
-
 echo "Done running grunt"
 
 echo "Updateting web driver"
