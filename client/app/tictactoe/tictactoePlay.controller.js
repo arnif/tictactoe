@@ -13,7 +13,7 @@ angular.module('tictactoeApp')
 
     $scope.myTurn = false;
 
-    $scope.creator = TicTacToeService.getCreator();
+    $scope.isCreator = TicTacToeService.getCreator();
 
     $scope.board = [
       ['', '', ''],
