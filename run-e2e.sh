@@ -17,13 +17,10 @@ npm install
 echo "Bower install"
 bower install
 
-echo "Done running grunt"
-
 echo "Updateting web driver"
 node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update
 
 echo "Running e2e tests"
 grunt test:e2e
-
 
 echo "Done"
