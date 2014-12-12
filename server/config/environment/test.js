@@ -5,6 +5,6 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/tictactoe-test'
+    uri: 'mongodb://test:test@ds063630.mongolab.com:63630/tictac-test'
   }
 };
