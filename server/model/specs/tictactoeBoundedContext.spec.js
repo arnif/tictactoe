@@ -1,28 +1,39 @@
-var jm = require('jsmockito').JsMockito;
-jm.Integration.importTo(global);
+var should = require('should');
 var _ = require('lodash');
+var q = require('q');
 
 
-describe('tictactoe game context using stubs.', function() {
+function resolvedPromise(value) {
+  var deferred = q.defer();
+  deferred.resolve(value);
+  return deferred.promise;
+}
 
-  it('should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests.',function(){
 
-    /*jshint ignore:start*/
+describe('tictactoe game context', function() {
+
+  it('should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests.',function(done){
+
+    /* jshint ignore:start */
+    var jm = require('jsmockito').JsMockito;
+    jm.Integration.importTo(global);
+
     var mockStore = spy({
       loadEvents : function(){
+        return resolvedPromise([]);
       },
-      storeEvents : function(){
+      storeEvents : function(events){
+        return resolvedPromise(events);
       }
     });
 
-    when(mockStore).loadEvents('123').thenReturn([]);
 
     var mockTickTackToe = spy({
       executeCommand : function(){
+        return resolvedPromise([]);
+
       }
     });
-
-    when(mockTickTackToe).executeCommand().thenReturn([]);
 
 
     var commandHandlers =function(){
@@ -34,14 +45,17 @@ describe('tictactoe game context using stubs.', function() {
       id: "123"
     };
 
-    boundedContext.handleCommand(emptyCommand);
+    boundedContext.handleCommand(emptyCommand).then(function(){
 
-    jm.verify(mockStore).loadEvents('123');
-    jm.verify(mockStore).storeEvents('123');
+      jm.verify(mockStore).loadEvents('123');
+      jm.verify(mockStore).storeEvents('123');
 
-    jm.verify(mockTickTackToe).executeCommand(emptyCommand);
+      jm.verify(mockTickTackToe).executeCommand(emptyCommand);
 
-    /*jshint ignore:end*/
+      done();
+    });
+
+    /* jshint ignore:end */
 
   });
 

@@ -16,7 +16,10 @@ exports.executeCommand = function(req, res) {
 
   var context = boundedContext(store, tictactoeHandler);
 
-  var result = context.handleCommand(req.body);
+  context.handleCommand(req.body).then(function(result) {
+    res.json(result);
+  }, function(err) {
+    res.json(err);
+  });
 
-  res.json(result);
 };

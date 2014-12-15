@@ -1,4 +1,4 @@
-var Event = require('../../schema/eventSchema');
+var Event = require('./schema/eventSchema');
 var _ = require('lodash');
 
 var q = require('q');
@@ -9,7 +9,7 @@ module.exports = {
     var deferred = q.defer();
     Event.find({}, function(err, results) {
       if (err) {
-        throw err;
+        deferred.reject();
       }
       if (results) {
         deferred.resolve(results);
@@ -21,7 +21,7 @@ module.exports = {
     var deferred = q.defer();
     Event.findById(id, function(err, results) {
       if (err) {
-        throw err;
+        deferred.reject();
       }
       if (results) {
         deferred.resolve(results.events);
@@ -31,9 +31,15 @@ module.exports = {
   },
 
   storeEvents: function(cmd_id, events) {
+    var deferred = q.defer();
     Event.update( { "_id" : cmd_id }, { $push : { "events" : events[0]}}, { upsert: true }, function(err, result) {
-      //console.log(result);
+      if (err) {
+        deferred.reject();
+      }  else {
+        deferred.resolve();
+      }
     });
+    return deferred.promise;
 
   }
 };

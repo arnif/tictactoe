@@ -10,7 +10,9 @@ exports.getEvents = function(req, res) {
 
   var store = app.eventStore;
 
-  res.json(store.loadEvents(req.params.uuid));
+  store.loadEvents(req.params.uuid).then(function(result) {
+    res.json(result);
+  });
 };
 
 

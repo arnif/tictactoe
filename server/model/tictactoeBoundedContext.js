@@ -1,15 +1,19 @@
 var _ = require('lodash');
-var dataStore = require('../eventstore/database/databaseStore');
+var q = require('q');
 
 module.exports = function(eventStore, cmdHandler){
   return {
     handleCommand : function(cmd){
-      var eventStream = eventStore.loadEvents(cmd.id);
-      //var eventStream = dataStore.loadEvents(cmd.id);
-      var events = cmdHandler(eventStream).executeCommand(cmd);
-      eventStore.storeEvents(cmd.id, events);
-      dataStore.storeEvents(cmd.id, events);
-      return events;
+      var deferred = q.defer();
+      eventStore.loadEvents(cmd.id).then(function(eventStream) {
+        var events = cmdHandler(eventStream).executeCommand(cmd);
+        eventStore.storeEvents(cmd.id, events).then(function() {
+          deferred.resolve(events);
+        }, function(err) {
+          deferred.reject(err);
+        });
+      });
+      return deferred.promise;
     }
   }
 };
