@@ -6,7 +6,6 @@ module.exports = function(eventStore, cmdHandler){
     handleCommand : function(cmd){
       var deferred = q.defer();
       eventStore.loadEvents(cmd.id).then(function(eventStream) {
-        console.log('eventsteream', eventStream);
         var events = cmdHandler(eventStream).executeCommand(cmd);
         eventStore.storeEvents(cmd.id, events).then(function() {
           deferred.resolve(events);
