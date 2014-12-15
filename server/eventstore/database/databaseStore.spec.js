@@ -13,7 +13,9 @@ describe('Database store', function() {
 
   it('Should return empty array for unknown id', function() {
 
-    dataStore.loadEvents('123').then(function(err, loadedEvents) {
+    var store = dataStore();
+
+    store.loadEvents('123').then(function(err, loadedEvents) {
       should(loadedEvents.length).be.exactly(0);
       should(loadedEvents).be.instanceof(Array);
       should(loadedEvents).eql(['A']);
@@ -25,9 +27,12 @@ describe('Database store', function() {
 
   it('Should return events previously stored', function() {
 
-    dataStore.storeEvents('123', [{'id': '1'}]).then(function() {
-      dataStore.loadEvents('123').then(function(loadedEvents) {
+    var store = dataStore();
+
+    store.storeEvents('123', [{'id': '1'}]).then(function() {
+      store.loadEvents('123').then(function(loadedEvents) {
         should(loadedEvents).eql([{'id':'1'}]);
+
       });
     });
 
@@ -36,9 +41,11 @@ describe('Database store', function() {
 
   it('should append stored events to events previously stored',function(){
 
-    dataStore.storeEvents('123', [{'id': '1'}]).then(function() {
-      dataStore.storeEvents('123', [{'id': '2'}]).then(function() {
-        dataStore.loadEvents('123').then(function(loadedEvents) {
+    var store = dataStore();
+
+    store.storeEvents('123', [{'id': '1'}]).then(function() {
+      store.storeEvents('123', [{'id': '2'}]).then(function() {
+        store.loadEvents('123').then(function(loadedEvents) {
           should(loadedEvents).eql([{"id":"1"},{"id":"2"}]);
         });
       });

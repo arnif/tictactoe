@@ -8,7 +8,7 @@ var errors = require('./components/errors');
 
 module.exports = function(app, config) {
 
-  var eventStore = require('.' + config.store);
+  var eventStore = require('.' + config.store)();
 
   // Insert routes below
   app.use('/api/placeMove', require('./api/placeMove')(eventStore).router);

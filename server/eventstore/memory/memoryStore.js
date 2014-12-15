@@ -13,6 +13,11 @@ module.exports = function(){
       store[id] = (store[id] || []).concat(events);
       deferred.resolve(store[id]);
       return deferred.promise;
+    },
+    numberOfEvents: function() {
+      var deferred = q.defer();
+      deferred.resolve(5); //TODO FIX
+      return deferred.promise;
     }
   }
 };

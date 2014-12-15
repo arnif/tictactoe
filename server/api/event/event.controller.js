@@ -4,6 +4,7 @@ var _ = require('lodash');
 var app = require('../../app');
 
 module.exports = function (eventStore) {
+  console.log('eventstore' ,eventStore);
   return {
     getEvents: function (req, res) {
       eventStore.loadEvents(req.params.uuid).then(function (events) {
@@ -13,8 +14,8 @@ module.exports = function (eventStore) {
       });
     },
     getTotalGamesCreated: function(req, res) {
-      eventStore.loadAllEvents().then(function(events) {
-        res.json(events.length);
+      eventStore.numberOfEvents().then(function(number) {
+        res.json(number);
       });
     }
   }

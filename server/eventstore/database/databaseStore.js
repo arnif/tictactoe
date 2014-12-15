@@ -5,43 +5,57 @@ var q = require('q');
 
 
 //Datastore
-module.exports = {
+module.exports = function() {
 
-  loadAllEvents: function() {
-    var deferred = q.defer();
-    Event.find({}, function(err, results) {
-      if (err) {
-        deferred.reject();
-      }
-      if (results) {
-        deferred.resolve(results);
-      }
-    });
-    return deferred.promise;
-  },
-  loadEvents: function(id) {
-    var deferred = q.defer();
-    Event.findById(id, function(err, results) {
-      if (err) {
-        deferred.reject(err);
-      }
+  return {
 
-      deferred.resolve(results && results.events || []);
+    loadAllEvents: function() {
+      var deferred = q.defer();
+      Event.find({}, function(err, results) {
+        if (err) {
+          deferred.reject();
+        }
+        if (results) {
+          deferred.resolve(results);
+        }
+      });
+      return deferred.promise;
+    },
+    loadEvents: function(id) {
+      var deferred = q.defer();
+      Event.findById(id, function(err, results) {
+        if (err) {
+          deferred.reject(err);
+        }
 
-    });
-    return deferred.promise;
-  },
+        deferred.resolve(results && results.events || []);
 
-  storeEvents: function(cmd_id, events) {
-    var deferred = q.defer();
-    Event.update( { "_id" : cmd_id }, { $push : { "events" : events[0]}}, { upsert: true }, function(err, result) {
-      if (err) {
-        deferred.reject();
-      }  else {
-        deferred.resolve(result);
-      }
-    });
-    return deferred.promise;
+      });
+      return deferred.promise;
+    },
+
+    storeEvents: function(cmd_id, events) {
+      var deferred = q.defer();
+      Event.update( { "_id" : cmd_id }, { $push : { "events" : events[0]}}, { upsert: true }, function(err, result) {
+        if (err) {
+          deferred.reject();
+        }  else {
+          deferred.resolve(result);
+        }
+      });
+      return deferred.promise;
+    },
+    numberOfEvents: function() {
+      var deferred = q.defer();
+      Event.count({}, function(err, result) {
+        if (err) {
+          deferred.reject(err);
+        } else {
+          deferred.resolve(result);
+        }
+      });
+      return deferred.promise;
+    }
 
   }
 };
