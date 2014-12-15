@@ -9,7 +9,7 @@ exports.executeCommand = function(req, res) {
 
 
   if(!app.eventStore){
-    app.eventStore = require('../eventstore/memoryStore')();
+    app.eventStore = require('../eventstore/memory/memoryStore')();
   }
 
   var store = app.eventStore;

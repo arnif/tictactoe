@@ -5,7 +5,7 @@ var app = require('../../app');
 
 exports.getEvents = function(req, res) {
   if(!app.eventStore){
-    app.eventStore = require('../../eventstore/memoryStore')();
+    app.eventStore = require('../../eventstore/memory/memoryStore')();
   }
 
   var store = app.eventStore;
@@ -15,7 +15,7 @@ exports.getEvents = function(req, res) {
 
 
 exports.getTotalGamesCreated = function(req, res) {
-  var store = require('../../eventstore/databaseStore');
+  var store = require('../../eventstore/database/databaseStore');
 
   store.loadAllEvents().then(function(events) {
     res.json(events.length);

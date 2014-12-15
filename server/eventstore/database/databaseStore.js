@@ -1,4 +1,4 @@
-var Event = require('../schema/eventSchema');
+var Event = require('../../schema/eventSchema');
 var _ = require('lodash');
 
 var q = require('q');

@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var dataStore = require('../eventstore/databaseStore');
+var dataStore = require('../eventstore/database/databaseStore');
 
 module.exports = function(eventStore, cmdHandler){
   return {

@@ -20,7 +20,7 @@ require('./routes')(app);
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
-app.eventStore = require('./eventstore/memoryStore')();
+app.eventStore = require('./eventstore/memory/memoryStore')();
 
 // Start server
 server.listen(config.port, config.ip, function () {
