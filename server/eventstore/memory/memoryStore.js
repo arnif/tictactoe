@@ -16,7 +16,11 @@ module.exports = function(){
     },
     numberOfEvents: function() {
       var deferred = q.defer();
-      deferred.resolve(5); //TODO FIX
+      var count = 0;
+      for (var key in store) {
+        count++;
+      }
+      deferred.resolve(count);
       return deferred.promise;
     }
   }
