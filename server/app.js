@@ -15,7 +15,7 @@ var _ = require('lodash');
 var app = express();
 var server = require('http').createServer(app);
 require('./config/express')(app);
-require('./routes')(app);
+require('./routes')(app, config);
 
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);

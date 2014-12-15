@@ -1,11 +1,15 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./event.controller.js');
-
 var router = express.Router();
 
-router.get('/total', controller.getTotalGamesCreated);
-router.get('/uuid/:uuid', controller.getEvents);
+module.exports = function(eventStore){
+  var controller = require('./event.controller.js')(eventStore);
 
-module.exports = router;
+  router.get('/total', controller.getTotalGamesCreated);
+  router.get('/uuid/:uuid', controller.getEvents);
+
+  return {
+    router: router
+  }
+};

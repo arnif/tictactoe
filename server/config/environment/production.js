@@ -19,5 +19,6 @@ module.exports = {
             process.env.MONGOHQ_URL ||
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
             'mongodb://production:production@ds063630.mongolab.com:63630/tictac'
-  }
+  },
+  store: '/eventstore/database/databaseStore'
 };

@@ -3,6 +3,8 @@ var _ = require('lodash');
 
 var q = require('q');
 
+
+//Datastore
 module.exports = {
 
   loadAllEvents: function() {
@@ -17,15 +19,15 @@ module.exports = {
     });
     return deferred.promise;
   },
-  loadEventById: function(id) {
+  loadEvents: function(id) {
     var deferred = q.defer();
     Event.findById(id, function(err, results) {
       if (err) {
-        deferred.reject();
+        deferred.reject(err);
       }
-      if (results) {
-        deferred.resolve(results.events);
-      }
+
+      deferred.resolve(results && results.events || []);
+
     });
     return deferred.promise;
   },
@@ -36,7 +38,7 @@ module.exports = {
       if (err) {
         deferred.reject();
       }  else {
-        deferred.resolve();
+        deferred.resolve(result);
       }
     });
     return deferred.promise;
