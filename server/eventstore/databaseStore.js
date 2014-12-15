@@ -32,7 +32,7 @@ module.exports = {
 
   storeEvents: function(cmd_id, events) {
     Event.update( { "_id" : cmd_id }, { $push : { "events" : events[0]}}, { upsert: true }, function(err, result) {
-      console.log(result);
+      //console.log(result);
     });
 
   }

@@ -14,6 +14,7 @@ describe('Controller: TicTacToeCtrl', function () {
     http = $http;
     httpBackend = $injector.get('$httpBackend');
     httpBackend.whenGET('app/tictactoe/tictactoe.html').respond(200);
+    httpBackend.expectGET('/api/events/total').respond(200);
     state = $state;
 
     scope = $rootScope.$new();
@@ -48,6 +49,8 @@ describe('Controller: TicTacToeCtrl', function () {
     scope.userName = 'Bruce';
 
     scope.createGame();
+
+
     httpBackend.flush();
 
     expect(scope.processedEvents.length).toBe(1);

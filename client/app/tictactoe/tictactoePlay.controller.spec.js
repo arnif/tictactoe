@@ -14,7 +14,7 @@ describe('Controller: TicTacToeCtrl', function () {
     http = $http;
     httpBackend = $injector.get('$httpBackend');
     //httpBackend.whenGET('app/tictactoe/tictactoe.play.html').respond(200);
-    httpBackend.whenGET('/api/events/undefined').respond(200);
+    httpBackend.whenGET('/api/events/uuid/undefined').respond(200);
 
     scope = $rootScope.$new();
     TicTacToeCtrl = $controller('PlayTicTacToeCtrl', {
@@ -30,7 +30,7 @@ describe('Controller: TicTacToeCtrl', function () {
   it('should get list of zero events', function () {
 
     scope.uuid = '123';
-    httpBackend.whenGET('/api/events/undefined').respond({
+    httpBackend.whenGET('/api/events/uuid/undefined').respond({
       id: '123'
     });
 
@@ -54,7 +54,7 @@ describe('Controller: TicTacToeCtrl', function () {
       }]
     );
 
-    httpBackend.expectGET('/api/events/123').respond({
+    httpBackend.expectGET('/api/events/uuid/123').respond({
       data: {
         event: 'GameJoined',
         user: {
@@ -89,7 +89,7 @@ describe('Controller: TicTacToeCtrl', function () {
       }]
     );
 
-    httpBackend.expectGET('/api/events/123').respond({
+    httpBackend.expectGET('/api/events/uuid/123').respond({
       data: {
         event: 'GameCreated',
         user: {
@@ -156,7 +156,7 @@ describe('Controller: TicTacToeCtrl', function () {
       }]
     );
 
-    httpBackend.expectGET('/api/events/123').respond({
+    httpBackend.expectGET('/api/events/uuid/123').respond({
       data: {
         event: 'PlayerMoved',
         move: {
@@ -211,7 +211,7 @@ describe('Controller: TicTacToeCtrl', function () {
       }]
     );
 
-    httpBackend.expectGET('/api/events/123').respond({
+    httpBackend.expectGET('/api/events/uuid/123').respond({
       data: {
         event: 'GameWon',
         move: {
@@ -251,7 +251,7 @@ describe('Controller: TicTacToeCtrl', function () {
       }]
     );
 
-    httpBackend.expectGET('/api/events/123').respond({
+    httpBackend.expectGET('/api/events/uuid/123').respond({
       data: {
         event: 'GameDraw',
         move: {

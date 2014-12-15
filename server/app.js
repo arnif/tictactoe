@@ -21,19 +21,11 @@ require('./routes')(app);
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
 app.eventStore = require('./eventstore/memoryStore')();
-var dataStore = require('./eventstore/databaseStore');
 
 // Start server
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 
-  /*dataStore.loadAllEvents().then(function(data) {
-    //console.log(data);
-    for(var i = 0; i < data.length; i++) {
-      console.log(data[i].events);
-      app.eventStore.storeEvents(data[i].events.id, data[i].events);
-    }
-  }); */
 });
 
 

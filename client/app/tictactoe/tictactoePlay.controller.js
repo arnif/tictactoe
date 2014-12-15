@@ -24,7 +24,7 @@ angular.module('tictactoeApp')
     $scope.events = [];
 
     $scope.updateEvents = function() {
-      var getPromise = $http.get('/api/events/' + $scope.uuid);
+      var getPromise = $http.get('/api/events/uuid/' + $scope.uuid);
 
       getPromise.then(function(data) {
         $scope.processEvents(data.data);
