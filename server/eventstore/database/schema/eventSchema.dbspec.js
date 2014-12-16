@@ -10,8 +10,11 @@ describe('event store', function() {
     var Event = require('./eventSchema');
 
     var sampleGame = {
-      _id:'999',
-      events:[{event:"sampleevent"}]
+      _id:'12344',
+      events:[{
+        id: '1234',
+        event: 'GameCreated'
+      }]
     };
 
     Event.create(sampleGame, function(err, event) {
