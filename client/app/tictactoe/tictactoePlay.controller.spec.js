@@ -128,6 +128,29 @@ describe('Controller: TicTacToeCtrl', function () {
 
   });
 
+  it('should reverse the order of events', function() {
+
+    var events = [{
+      event: 'GameCreated',
+      user: {
+        userName: 'Clark'
+      },
+      name: 'FirstGame'
+    },
+      {
+        event: 'GameJoined',
+        user: {
+          userName: 'Bruce'
+        },
+        name: 'FirstGame'
+      }];
+
+    scope.processEvents(events);
+    expect(scope.events[0].event).toBe('GameJoined');
+    httpBackend.flush();
+
+  });
+
   it('should try to join a game but fail', function() {
     scope.uuid = '123';
 

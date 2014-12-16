@@ -50,9 +50,12 @@ angular.module('tictactoeApp')
       }
     };
 
-    $http.get('/api/events/total').then(function(total) {
-      $scope.totalGamesCreated = total.data;
-    });
+    $scope.getTotal = function() {
+      $http.get('/api/events/total').then(function(total) {
+        $scope.totalGamesCreated = total.data;
+      });
+    };
+    $scope.getTotal();
 
       /* jshint ignore:start */
     function generateUUID() {

@@ -105,7 +105,6 @@ angular.module('tictactoeApp')
     };
 
     $scope.move = function(x, y) {
-      console.log(x + ' ' + y);
 
       var myType = TicTacToeService.getMyType();
       var user = TicTacToeService.getUserName();

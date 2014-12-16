@@ -7,21 +7,70 @@ describe('Controller: TicTacToeCtrl', function () {
   // load the controller's module
   beforeEach(module('tictactoeApp'));
 
-  var TicTacToeCtrl, scope, httpBackend, http, state, $state;
+  var TicTacToeCtrl, scope, httpBackend, http, state, ticTacToeService,
+    myType, userName, gameName, creatorName, joinName, creator;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($injector, $controller, $rootScope, $http, $state) {
-    http = $http;
-    httpBackend = $injector.get('$httpBackend');
-    httpBackend.whenGET('app/tictactoe/tictactoe.html').respond(200);
-    httpBackend.expectGET('/api/events/total').respond(200);
-    state = $state;
+  beforeEach(function() {
+    ticTacToeService = {
+      getMyType: function() {
+        return myType;
+      },
+      setMyType: function(type) {
+        myType = type;
+      },
+      setUserName: function(name) {
+        userName = name;
+      },
+      getUserName: function() {
+        return userName;
+      },
+      setGameName: function(name) {
+        gameName = name;
+      },
+      getGameName: function(){
+        return gameName;
+      },
+      setCreatorName: function(name) {
+        creatorName = name;
+      },
+      getCreatorName: function() {
+        return creatorName;
+      },
+      setJoinName: function(name) {
+        joinName = name;
+      },
+      getJoinName: function(){
+        return joinName;
+      },
+      setCreator: function(value) {
+        creator = value;
+      },
+      getCreator: function() {
+        return creator;
+      }
+    };
 
-    scope = $rootScope.$new();
-    TicTacToeCtrl = $controller('TicTacToeCtrl', {
-      $scope: scope
+    module(function($provide){
+      $provide.value('TicTacToeService', ticTacToeService);
     });
-  }));
+
+
+    inject(function ($injector, $controller, $rootScope, $http, $state) {
+      http = $http;
+      httpBackend = $injector.get('$httpBackend');
+      httpBackend.whenGET('app/tictactoe/tictactoe.html').respond(200);
+      httpBackend.expectGET('/api/events/total').respond(200);
+      state = $state;
+
+      scope = $rootScope.$new();
+      TicTacToeCtrl = $controller('TicTacToeCtrl', {
+        $scope: scope
+      });
+      scope.$digest();
+    });
+
+  });
 
   afterEach(function () {
     httpBackend.verifyNoOutstandingExpectation();
@@ -54,6 +103,9 @@ describe('Controller: TicTacToeCtrl', function () {
     httpBackend.flush();
 
     expect(scope.processedEvents.length).toBe(1);
+    expect(ticTacToeService.getGameName()).toBe('TheSecondGame');
+    expect(ticTacToeService.getUserName()).toBe('Bruce');
+    expect(ticTacToeService.getCreator()).toBe(true);
 
   });
 
@@ -75,9 +127,19 @@ describe('Controller: TicTacToeCtrl', function () {
     }];
 
     scope.processEvents(event);
-
+    expect(ticTacToeService.getMyType()).toBe('X');
     httpBackend.expectGET('app/tictactoe/tictactoe.play.html').respond(200);
     httpBackend.flush();
+
+  });
+
+  it('should not allow to hard code total games', function() {
+
+    scope.getTotal();
+    httpBackend.expectGET('/api/events/total').respond({total: 3});
+    httpBackend.flush();
+    expect(scope.totalGamesCreated).toEqual({ total : 3 });
+
 
   });
 });

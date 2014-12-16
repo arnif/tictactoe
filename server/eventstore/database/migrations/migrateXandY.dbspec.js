@@ -30,27 +30,22 @@ describe('coordinates migration', function () {
     }]
   };
 
-  beforeEach(function (done) {
+
+  it('should migrate up', function () {
+
+    var migrateCoordinatesToXY = require('./migrateXandY').up;
 
     Game.create(sampleGame, function (err, game) {
       if (err) {
         return handleError(res, err);
       }
-      return done();
-    });
+      migrateCoordinatesToXY(function (err, games) {
+        _.each(games, function (game) {
 
-  });
+          game.events[0].move.should.have.property('xy');
+        });
 
-  it('should migrate up', function (done) {
-
-    var migrateCoordinatesToXY = require('./migrateXandY').up;
-
-    migrateCoordinatesToXY(function (err, games) {
-      _.each(games, function (game) {
-
-        game.events[0].move.should.have.property('xy');
       });
-      done();
     });
   });
 });

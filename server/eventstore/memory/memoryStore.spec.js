@@ -39,7 +39,19 @@ describe('In memory event store', function() {
         });
       });
     });
+  });
 
+  it('should have played 2 games', function() {
+    var store = memoryStore();
+
+    store.storeEvents('1234', [{"id":"1"}]).then(function() {
+      store.storeEvents('12345', [{"id":"2"}]).then(function() {
+        store.numberOfEvents().then(function(nr) {
+          should(nr).be.exactly(2);
+        })
+      });
+    });
 
   });
+
 });
