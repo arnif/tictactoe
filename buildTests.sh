@@ -30,6 +30,7 @@ npm install --production
 
 echo "Adding mongoose migrate"
 unzip -o -q ../node_modules_patch/mongoose-migrate.zip -d node_modules
+mkdir node_modules/.bin
 cd node_modules/.bin
 ln -s ../mongoose-migrate/bin/migrate mongoose-migrate
 cd ../..
