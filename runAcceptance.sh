@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 echo "Killing all docker process"
 docker kill $(docker ps -a -q)
 echo "pulling tictactoe"
