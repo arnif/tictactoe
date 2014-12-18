@@ -18,7 +18,17 @@ require('./config/express')(app);
 require('./routes')(app, config);
 
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+if(config.mongo.uri){
+  console.log("Connecting to mongoDb ", config.mongo.uri, config.mongo.options);
+  mongoose.connect(config.mongo.uri, config.mongo.options,function(err) {
+    if(err){
+      console.error("Error connecting to Mongo", err);
+      process.exit(1);
+    }
+  });
+} else {
+  console.log("No mongo.uri configured, not connecting");
+}
 
 
 // Start server
