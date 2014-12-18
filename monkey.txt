@@ -1,0 +1,7 @@
+breytti uuid í fasta í playcontroller
+swappaði columns og rows í html
+harðkóðaði inn username
+setti username sem id
+faldi borðið með css
+sendi borðið út fyrir skjáinn með css
+allt af þessu braut test og hér fór protractor að klikka
